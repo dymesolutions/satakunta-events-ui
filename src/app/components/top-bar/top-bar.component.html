@@ -1,0 +1,40 @@
+<div class="dark-theme top-bar">
+  <mat-toolbar>
+    <mat-toolbar-row>
+      <button mat-button class="link-button title-button">
+        Satakunta Events
+      </button>
+      <span style="flex: 1 1 auto; height:100%">
+        <button mat-button class="link-button" (click)="navigateToSearch()">
+          {{'shared.search_events' | translate}}
+          <mat-icon>search</mat-icon>
+        </button>
+        <button mat-button (click)="navigateToAbout()" class="link-button">
+          <mat-icon>help_outline</mat-icon>
+        </button>
+        <button mat-button (click)="navigateToEventCreate()" class="link-button" *ngIf="isLoggedIn">
+          {{'shared.create_event' | translate}}
+          <mat-icon>add</mat-icon>
+        </button>
+      </span>
+      <button mat-button class="link-button" (click)="navigateToLogin()" *ngIf="!isLoggedIn">
+        {{'shared.sign_in' | translate}}
+      </button>
+      <button mat-button class="link-button" (click)="navigateToManagement()" *ngIf="isLoggedIn">
+        {{'shared.administration' | translate}}
+        <mat-icon>list</mat-icon>
+      </button>
+      <button mat-button class="link-button" *ngIf="isLoggedIn">
+        <span *ngIf="loggedInUser.first_name">
+          {{loggedInUser.first_name}} {{loggedInUser?.last_name}}
+        </span>
+        <span *ngIf="!loggedInUser.first_name">
+          {{loggedInUser.username}}
+        </span>
+      </button>
+      <button mat-button (click)="logout()" class="link-button" *ngIf="isLoggedIn">
+        {{'shared.sign_out' | translate}}
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</div>

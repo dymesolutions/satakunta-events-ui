@@ -1,0 +1,83 @@
+<h2>{{'headers.add_new_image' | translate}}</h2>
+
+<mat-dialog-content [formGroup]="eventImageGroup">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 col-md-6 col-lg-6">
+        <div class="row row-spacing">
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="file-upload">
+              <label for="image-upload" class="app-theme-labels mat-raised-button">
+                {{'labels.upload_image' | translate}}
+              </label>
+              <input id="image-upload" #imageFile formControlName="imageFile" class="file-upload" type="file" accept=".jpg, .jpeg, .png">
+            </div>
+          </div>
+        </div>
+
+        <div class="row row-spacing">
+          <div class="col-sm-12 col-md-12 col-lg-12">
+            <label for="image-link" class="app-theme-labels">{{'labels.input_link' | translate}}</label>
+          </div>
+        </div>
+        <div class="row row-spacing">
+          <div class="col-sm-12 col-md-12 col-lg-12">
+            <input type="text" class="form-control" formControlName="url" placeholder="http://">
+
+            <mat-error *ngFor="let validation of validationMsgs?.url">
+              <mat-error class="error-message app-theme-text" *ngIf="eventImageGroup.get('url').hasError(validation.type) && (eventImageGroup.get('url').dirty || eventImageGroup.get('url').touched)">
+                {{validation.message}}
+              </mat-error>
+            </mat-error>
+          </div>
+        </div>
+
+        <div class="row row-spacing">
+          <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="image-preview">
+              <div>
+                <button (click)="deleteLoadedImage()" mat-button matTooltip="{{'shared.remove' | translate}}" *ngIf="uploadedFile">
+                  <mat-icon>delete</mat-icon>
+                  {{'shared.remove' | translate}}
+                </button>
+                <img src="assets/images/pori-default-p.png" *ngIf="!imgSrc" alt="">
+                <img style="width: 100%;" [src]="imgSrc" *ngIf="imgSrc" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-6 col-lg-6">
+        <div class="row row-spacing">
+          <div class="col-sm-12 col-md-12 col-lg-12">
+            <mat-checkbox formControlName="permissionConsent" class="app-theme-text">Minulla on lupa käyttää kuvaa, eikä sen julkaiseminen loukkaa kenenkään oikeuksia.</mat-checkbox>
+          </div>
+        </div>
+        <div class="row row-spacing">
+          <div class="col-sm-12 col-md-12 col-lg-12">
+            <p class="app-theme-text">
+              Annan luvan käyttää kuvaa missä tahansa tapahtumatiedon yhteydessä. Tapahtumatieto liikkuu avoimen rajapinnan (Satakunta
+              Events) yli. Tapahtumaan ladattu kuva on vapaasti hyödynnettävissä tapahtumatiedon yhteydessä erilaisissa mobiilisovelluksissa
+              ja verkkopalveluissa.
+            </p>
+
+            <p class="app-theme-text">
+              Kuvalle tulee CC 4.0 BY (ks.
+              <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">selitys</a>) käyttöoikeus, mutta kuvaa käytetään vain tapahtuman yhteydessä. Kuvan täytyy olla riittävän suuri
+              ja laadukas. Sallitut tiedostotyypit: png, jpg, jpeg. Tiedostokoon on oltava pienempi kuin 128 MB.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-divider></mat-divider>
+
+<mat-dialog-actions>
+  <div class="footer-buttons">
+    <button class="app-theme-labels" mat-raised-button (click)="formReady()">{{'shared.ready' | translate}}</button>
+    <button class="app-theme-labels" style="margin-right: 20px" mat-button (click)="close()">{{'shared.cancel' | translate}}</button>
+  </div>
+</mat-dialog-actions>

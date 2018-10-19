@@ -1,0 +1,10 @@
+<div *ngIf="meta?.count > itemsPerPage" class="paginator-container">
+  <div class="text-right">
+    <button mat-raised-button (click)="previous()" disabled="{{currentPage === 1}}">
+      {{'paginator.previous' | translate}}
+    </button>
+    <button mat-raised-button (click)="next()" disabled="{{!meta?.next}}">
+      {{'paginator.next' | translate}}
+    </button>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<!-- Only show label when 1 language is selected, otherwise show header -->
+<div [ngClass]="{'left-border-input-group': inLanguages.sv || inLanguages.en}">
+  <h4 *ngIf="inLanguages.sv || inLanguages.en">{{label}}</h4>
+  <mat-form-field class="form-field">
+    <label *ngIf="!inLanguages.sv && !inLanguages.en" for="{{formId}}-fi">{{label}} ({{'labels.in_finnish' | translate}}) *</label>
+    <label *ngIf="inLanguages.sv || inLanguages.en" for="{{formId}}-fi">{{'labels.in_finnish' | translate}} *</label>
+    <input matInput id="" class="text-input" type="text" [(ngModel)]="values.fi">
+  </mat-form-field>
+  <mat-form-field class="form-field" *ngIf="inLanguages.sv">
+    <label for="{{formId}}-sv">{{'labels.in_swedish' | translate}}</label>
+    <input matInput id="{{formId}}-sv" class="text-input" type="text" [(ngModel)]="values.sv">
+  </mat-form-field>
+  <mat-form-field class="form-field" *ngIf="inLanguages.en">
+    <label for="{{formId}}-en">{{'labels.in_english' | translate}}</label>
+    <input matInput id="{{formId}}-en" class="text-input" type="text" [(ngModel)]="values.en">
+  </mat-form-field>
+</div>

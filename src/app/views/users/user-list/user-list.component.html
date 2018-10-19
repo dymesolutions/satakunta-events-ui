@@ -1,0 +1,99 @@
+<div class="table-container">
+  <div class="loader-shade" *ngIf="loading">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <mat-toolbar>
+    <input type="text" class="form-control app-theme-text" name="search" [(ngModel)]="searchQuery" placeholder="{{'placeholders.name_or_username' | translate}}"
+      style="box-shadow: none">
+    <button class="button-search app-theme-labels" (click)="search()" mat-raised-button type="button">{{'buttons.fetch' | translate}}</button>
+
+    <div class="toolbar-right">
+      <button mat-icon-button (click)="updateUserList()">
+        <mat-icon>autorenew</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>
+
+  <hr>
+
+  <mat-accordion multi="true">
+    <mat-expansion-panel expanded="false" *ngFor="let user of users?.data">
+      <mat-expansion-panel-header>
+        <mat-panel-title class="app-theme-labels">
+          <span *ngIf="user.first_name || user.last_name">{{user.first_name}} {{user.last_name}} </span>
+          <span *ngIf="!user.first_name && !user.last_name">- </span>
+          <span>({{user.username}})</span>
+        </mat-panel-title>
+        <mat-panel-description>
+          <div class="toolbar-right">
+            <span style="padding-right: 5px">
+              <mat-icon matTooltip="{{'shared.is_staff' | translate}}" *ngIf="user.is_staff">security</mat-icon>
+            </span>
+          </div>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div class="row">
+        <div class="col-sm-12 col-md-4 col-lg-3">
+          <mat-form-field>
+            <label class="app-theme-labels" for="firstName{{user.id}}">{{'placeholders.first_name' | translate}}</label>
+            <input matInput id="firstName{{user.id}}" name="first-name-{{user.id}}" [disabled]="user.fieldsLocked || loading" class="text-input"
+              type="text" [(ngModel)]="user.first_name">
+          </mat-form-field>
+        </div>
+        <div class="col-sm-12 col-md-4 col-lg-3">
+          <mat-form-field>
+            <label class="app-theme-labels" for="lastName{{user.id}}">{{'placeholders.last_name' | translate}}</label>
+            <input matInput id="lastName{{user.id}}" name="last-name-{{user.id}}" [disabled]="user.fieldsLocked || loading" class="text-input"
+              type="text" [(ngModel)]="user.last_name">
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12 col-md-4 col-lg-3">
+          <mat-form-field>
+            <label class="app-theme-labels" for="organization{{user.id}}">{{'shared.group' | translate}}</label>
+            <mat-select [disabled]="user.fieldsLocked || loading" class="app-theme-text" id="organization{{user.id}}" (change)="onChangeOrganization($event, user)"
+              [(ngModel)]="user.organization.id">
+              <mat-option *ngFor="let organization of organizations" [value]="organization.id">
+                {{organization.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="col-sm-12 col-md-4 col-lg-3">
+          <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              <mat-slide-toggle [color]="primary" [(ngModel)]="user.is_staff" [checked]="user.is_staff" [disabled]="user.fieldsLocked || loading"
+                (change)="toggleRole(user)">
+                {{'shared.is_staff' | translate}}
+              </mat-slide-toggle>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              <mat-slide-toggle [color]="primary" [(ngModel)]="user.is_active" [checked]="user.is_active" [disabled]="user.fieldsLocked || loading"
+                (change)="toggleActive(user)">
+                {{'shared.is_active' | translate}}
+              </mat-slide-toggle>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <mat-action-row>
+        <button (click)="unlockFields(user)" mat-icon-button matTooltip="{{'shared.unlock_fields' | translate}}" *ngIf="user.fieldsLocked">
+          <mat-icon>lock</mat-icon>
+        </button>
+        <button (click)="lockFields(user)" mat-icon-button matTooltip="{{'shared.lock_fields' | translate}}" *ngIf="!user.fieldsLocked">
+          <mat-icon>lock_open</mat-icon>
+        </button>
+        <button mat-raised-button (click)="save(user)" [disabled]="user.fieldsLocked || loading">{{'buttons.save' | translate}}</button>
+      </mat-action-row>
+
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

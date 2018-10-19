@@ -1,0 +1,155 @@
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormValidationUtil } from '@app/utils/form-validation-util';
+import { TranslateService } from '@ngx-translate/core';
+
+export const httpPattern = /^(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/;
+
+@Component({
+  selector: 'app-event-add-image-dialog',
+  templateUrl: './event-add-image-dialog.component.html',
+  styleUrls: ['./event-add-image-dialog.component.scss']
+})
+export class EventAddImageDialogComponent implements OnInit {
+
+  eventImageGroup: FormGroup;
+  imgSrc: string;
+  linkRef: string;
+  @ViewChild('imageFile') imageFile: ElementRef;
+
+  uploadedFile;
+
+  validationMsgs: any;
+
+  constructor(
+    private dialogRef: MatDialogRef<EventAddImageDialogComponent>,
+    private snackBar: MatSnackBar,
+    private translateService: TranslateService,
+    @Inject(MAT_DIALOG_DATA) data: any
+  ) {
+    this.eventImageGroup = new FormGroup({
+      'url': new FormControl('', Validators.pattern(httpPattern)),
+      imageFile: new FormControl(''),
+      'permissionConsent': new FormControl(false, Validators.requiredTrue)
+    });
+
+    if (data.image && !data.imageFile) {
+      const imageUrl = data.image.url;
+      this.loadImageUrl(imageUrl);
+      this.eventImageGroup.get('url').setValue(imageUrl);
+    }
+
+    if (data.imageFile) {
+      this.uploadedFile = data.imageFile;
+    }
+
+    this.initValidationMessages();
+  }
+
+  ngOnInit() {
+    if (this.uploadedFile) {
+      this.loadImageFromFile();
+    }
+
+    // Image Link
+    this.eventImageGroup.get('url').valueChanges
+      .subscribe(value => {
+        const imageUrl = this.eventImageGroup.get('url');
+        if (imageUrl.value.length > 0) {
+          if (imageUrl.valid) {
+            this.imgSrc = value;
+            this.uploadedFile = null;
+          } else {
+            console.log('Not valid');
+          }
+        } else {
+          if (!this.uploadedFile) {
+            this.imgSrc = null;
+          }
+        }
+      });
+
+    // Image Upload
+    this.eventImageGroup.get('imageFile').valueChanges
+      .subscribe(value => {
+        this.uploadedFile = this.imageFile.nativeElement.files[0];
+        this.loadImageFromFile();
+      });
+  }
+
+  private initValidationMessages() {
+    this.translateService.get([
+      'validations.link'
+    ]).subscribe(msg => {
+      this.validationMsgs = {
+        url: [{
+          type: 'pattern',
+          message: msg['validations.link']
+        }],
+      };
+    });
+  }
+
+  private loadImageFromFile() {
+    // Read the file for preview
+    const reader = new FileReader();
+
+    reader.onload = (elem: any) => {
+      this.eventImageGroup.get('url').setValue('');
+      this.imgSrc = elem.target.result;
+    };
+
+    reader.readAsDataURL(this.uploadedFile);
+  }
+
+  deleteLoadedImage() {
+    this.imgSrc = '';
+    this.uploadedFile = null;
+  }
+
+  private loadImageUrl(url: string) {
+    this.imgSrc = url;
+  }
+
+  formReady() {
+    FormValidationUtil.markFormGroupAsTouched(this.eventImageGroup);
+    // Image uploaded or linked
+    if (this.uploadedFile || this.eventImageGroup.get('url').value) {
+      // Validate URL
+      if (this.eventImageGroup.get('url').valid) {
+        // Check for consent
+        if (this.eventImageGroup.get('permissionConsent').value) {
+          this.dialogRef.close({
+            linkRef: this.imgSrc,
+            file: this.uploadedFile ? this.uploadedFile : null
+          });
+        } else {
+          this.translateService.get([
+            'gdpr.you_must_accept',
+            'shared.ok'
+          ]).subscribe(msg => {
+            this.snackBar.open(msg['gdpr.you_must_accept'], msg['shared.ok'], {
+              duration: 3000
+            });
+          });
+        }
+      }
+    } else {
+      // No image or image removed
+      this.dialogRef.close({
+        linkRef: null,
+        file: null
+      });
+    }
+  }
+
+  close() {
+    this.dialogRef.close({
+      linkRef: this.imgSrc,
+      file: this.uploadedFile
+    });
+  }
+
+}

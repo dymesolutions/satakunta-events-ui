@@ -1,0 +1,524 @@
+<div class="container page-margin-top">
+  <h1 *ngIf="!editMode">{{'shared.create_event' | translate}}</h1>
+  <h1 *ngIf="editMode">{{'shared.edit_event' | translate}}</h1>
+</div>
+
+<div class="container tip app-theme-labels">
+  <div class="row">
+    <div class="col-sm-6 col-md-3 col-lg-3">
+      {{ 'tips.event_details_are_inputted_in' | translate }}
+    </div>
+    <div class="col-sm-6 col-md-3 col-lg-3">
+      <mat-checkbox class="app-theme-labels" checked="inputLanguage.fi" name="inputLanguageFi" [(ngModel)]="inputLanguage.fi">
+        {{ 'labels.in_finnish' | translate }}
+      </mat-checkbox>
+    </div>
+    <div class="col-sm-6 col-md-3 col-lg-3">
+      <mat-checkbox class="app-theme-labels" checked="inputLanguage.sv" name="inputLanguageSv" [(ngModel)]="inputLanguage.sv">
+        {{ 'labels.in_swedish' | translate }}
+      </mat-checkbox>
+    </div>
+    <div class="col-sm-6 col-md-3 col-lg-3">
+      <mat-checkbox class="app-theme-labels" checked="inputLanguage.en" name="inputLanguageEn" [(ngModel)]="inputLanguage.en">
+        {{ 'labels.in_english' | translate }}
+      </mat-checkbox>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <form class="page-margin-bottom">
+    <div class="event-basic-details" [formGroup]="basicDetailsGroup">
+      <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+          <h2>{{'events.basic_details' | translate}}</h2>
+        </div>
+      </div>
+
+      <!-- Event Name -->
+      <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-6">
+          <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              <div [ngClass]="{'left-border-input-group': inputLanguage.sv || inputLanguage.en}">
+                <h4 *ngIf="inputLanguage.sv || inputLanguage.en" class="app-theme-labels">{{'shared.event_name' | translate}}</h4>
+                <mat-form-field class="form-field app-theme-labels">
+                  <label *ngIf="!inputLanguage.sv && !inputLanguage.en" class="app-theme-labels" for="eventNameFi">{{'shared.event_name' | translate}} ({{'labels.in_finnish' | translate}}) *</label>
+                  <label *ngIf="inputLanguage.sv || inputLanguage.en" class="app-theme-labels" for="eventNameFi">{{'labels.in_finnish' | translate}} *</label>
+                  <input matInput #eventNameFi id="eventNameFi" name="eventNameFi" class="text-input" type="text" formControlName="nameFi" maxlength="255">
+                </mat-form-field>
+
+                <mat-error *ngFor="let validation of basicDetailsValidationMsgs?.nameFi">
+                  <mat-error class="error-message app-theme-text" *ngIf="basicDetailsGroup.get('nameFi').hasError(validation.type) && (basicDetailsGroup.get('nameFi').dirty || basicDetailsGroup.get('nameFi').touched)">
+                    {{validation.message}}
+                  </mat-error>
+                </mat-error>
+
+                <mat-form-field class="form-field app-theme-labels" *ngIf="inputLanguage.sv">
+                  <label *ngIf="!inputLanguage.sv && !inputLanguage.en" class="app-theme-labels" for="eventNameSv">{{'shared.event_name' | translate}} ({{'labels.in_swedish' | translate}})</label>
+                  <label *ngIf="inputLanguage.sv || inputLanguage.en" class="app-theme-labels" for="eventNameSv">{{'labels.in_swedish' | translate}} *</label>
+                  <input matInput #eventNameSv id="eventNameSv" name="eventNameSv" class="text-input" type="text" formControlName="nameSv" maxlength="255">
+                </mat-form-field>
+
+                <mat-form-field class="form-field app-theme-labels" *ngIf="inputLanguage.en">
+                  <label *ngIf="!inputLanguage.sv && !inputLanguage.en" class="app-theme-labels" for="eventNameEn">{{'shared.event_name' | translate}} ({{'labels.in_english' | translate}})</label>
+                  <label *ngIf="inputLanguage.sv || inputLanguage.en" class="app-theme-labels" for="eventNameEn">{{'labels.in_english' | translate}} *</label>
+                  <input matInput #eventNameEn id="eventNameEn" name="eventNameEn" class="text-input" type="text" formControlName="nameEn" maxlength="255">
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+
+          <!-- Short description -->
+          <div class="row row-spacing">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              <div [ngClass]="{'left-border-input-group': inputLanguage.sv || inputLanguage.en}">
+                <h4 *ngIf="inputLanguage.sv || inputLanguage.en" class="app-theme-labels">{{'shared.short_description' | translate}}</h4>
+                <mat-form-field class="form-field app-theme-labels">
+                  <label *ngIf="!inputLanguage.sv && !inputLanguage.en" class="app-theme-labels" for="event-short-description-fi">{{'shared.short_description' | translate}} ({{'labels.in_finnish' | translate}}) *</label>
+                  <label *ngIf="inputLanguage.sv || inputLanguage.en" class="app-theme-labels" for="event-short-description-fi">{{'labels.in_finnish' | translate}} *</label>
+                  <textarea matInput #shortDescription id="shortDescriptionFi" maxlength="160" name="shortDescriptionFi" class="text-input" type="text" formControlName="shortDescriptionFi"></textarea>
+
+                </mat-form-field>
+
+                <mat-error *ngFor="let validation of basicDetailsValidationMsgs?.shortDescriptionFi">
+                  <mat-error class="error-message app-theme-text" *ngIf="basicDetailsGroup.get('shortDescriptionFi').hasError(validation.type) && (basicDetailsGroup.get('shortDescriptionFi').dirty || basicDetailsGroup.get('shortDescriptionFi').touched)">
+                    {{validation.message}}
+                  </mat-error>
+                </mat-error>
+
+                <mat-form-field class="form-field app-theme-labels" *ngIf="inputLanguage.sv">
+                  <label *ngIf="!inputLanguage.sv && !inputLanguage.en" class="app-theme-labels" for="shortDescriptionSv">{{'shared.short_description' | translate}} ({{'labels.in_swedish' | translate}})</label>
+                  <label *ngIf="inputLanguage.sv || inputLanguage.en" class="app-theme-labels" for="shortDescriptionSv">{{'labels.in_swedish' | translate}} *</label>
+                  <textarea matInput #shortDescriptionSv id="shortDescriptionSv" maxlength="160" name="shortDescriptionSv" class="text-input" type="text" formControlName="shortDescriptionSv"></textarea>
+                  <mat-hint align="end">{{shortDescriptionSv?.value.length || 0}}/160</mat-hint>
+                </mat-form-field>
+
+                <mat-form-field class="form-field app-theme-labels" *ngIf="inputLanguage.en">
+                  <label *ngIf="!inputLanguage.sv && !inputLanguage.en" class="app-theme-labels" for="shortDescriptionEn">{{'shared.event_name' | translate}} ({{'labels.in_english' | translate}})</label>
+                  <label *ngIf="inputLanguage.sv || inputLanguage.en" class="app-theme-labels" for="shortDescriptionEn">{{'labels.in_english' | translate}} *</label>
+                  <textarea matInput #shortDescriptionEn id="shortDescriptionEn" maxlength="160" name="shortDescriptionEn" class="text-input" type="text" formControlName="shortDescriptionEn"></textarea>
+                  <mat-hint align="end">{{shortDescriptionEn?.value.length || 0}}/160</mat-hint>
+                </mat-form-field>
+              </div>
+
+              <p class="tip">
+                {{'tips.event_short_description' | translate}}
+              </p>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div class="row row-spacing">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              <div [ngClass]="{'left-border-input-group': inputLanguage.sv || inputLanguage.en}">
+                <h4 *ngIf="inputLanguage.sv || inputLanguage.en" class="app-theme-labels">{{'shared.description' | translate}}</h4>
+                <mat-form-field class="form-field app-theme-labels">
+                  <label *ngIf="!inputLanguage.sv && !inputLanguage.en" class="app-theme-labels" for="event-description-fi">{{'shared.description' | translate}} ({{'labels.in_finnish' | translate}}) *</label>
+                  <label *ngIf="inputLanguage.sv || inputLanguage.en" class="app-theme-labels" for="event-description-fi">{{'labels.in_finnish' | translate}} *</label>
+                  <textarea matInput id="descriptionFi" name="descriptionFi" class="text-input" type="text" formControlName="descriptionFi"></textarea>
+                </mat-form-field>
+
+                <mat-error *ngFor="let validation of basicDetailsValidationMsgs?.descriptionFi">
+                  <mat-error class="error-message app-theme-text" *ngIf="basicDetailsGroup.get('descriptionFi').hasError(validation.type) && (basicDetailsGroup.get('descriptionFi').dirty || basicDetailsGroup.get('descriptionFi').touched)">
+                    {{validation.message}}
+                  </mat-error>
+                </mat-error>
+
+                <mat-form-field class="form-field app-theme-labels" *ngIf="inputLanguage.sv">
+                  <label *ngIf="!inputLanguage.sv && !inputLanguage.en" class="app-theme-labels" for="descriptionSv">{{'shared.description' | translate}} ({{'labels.in_swedish' | translate}})</label>
+                  <label *ngIf="inputLanguage.sv || inputLanguage.en" class="app-theme-labels" for="descriptionSv">{{'labels.in_swedish' | translate}} *</label>
+                  <textarea matInput id="descriptionSv" name="descriptionSv" class="text-input" type="text" formControlName="descriptionSv"></textarea>
+                </mat-form-field>
+
+                <mat-form-field class="form-field app-theme-labels" *ngIf="inputLanguage.en">
+                  <label *ngIf="!inputLanguage.sv && !inputLanguage.en" class="app-theme-labels" for="descriptionEn">{{'shared.description' | translate}} ({{'labels.in_english' | translate}})</label>
+                  <label *ngIf="inputLanguage.sv || inputLanguage.en" class="app-theme-labels" for="descriptionEn">{{'labels.in_english' | translate}} *</label>
+                  <textarea matInput id="descriptionEn" name="descriptionEn" class="text-input" type="text" formControlName="descriptionEn"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-sm-12 col-md-6 col-lg-6">
+          <div class="event-image-preview" *ngIf="!imgSrc" (click)="openAddImageDialog()">
+            <mat-icon class="upload-icon">file_upload</mat-icon>
+            {{'labels.add_image' | translate}}
+          </div>
+          <div *ngIf="imgSrc" class="event-image" (click)="openAddImageDialog()">
+            <img [src]="imgSrc" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Date and time -->
+    <div class="event-datetime" [formGroup]="dateTimeGroup">
+      <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+          <h2>{{'events.time_period' | translate}}</h2>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12 col-md-3 col-lg-3">
+          <div class="row-spacing">
+            <label class="app-theme-labels" for="event-start">{{'events.starts' | translate}} *</label>
+            <input matInput [matDatepicker]="startTimePicker" formControlName="startTime" (click)="startTimePicker.open()" placeholder="{{'placeholders.date_format' | translate}}">
+            <mat-datepicker #startTimePicker></mat-datepicker>
+          </div>
+          <mat-error *ngFor="let validation of dateTimeValidationMsgs?.startTime">
+            <mat-error class="error-message app-theme-text" *ngIf="dateTimeGroup.get('startTime').hasError(validation.type) && (dateTimeGroup.get('startTime').dirty || dateTimeGroup.get('startTime').touched)">
+              {{validation.message}}
+            </mat-error>
+          </mat-error>
+          <div class="row-spacing">
+            <input type="text" matInput placeholder="{{'placeholders.time_format' | translate}}" formControlName="startTimeClock">
+          </div>
+          <mat-error *ngFor="let validation of dateTimeValidationMsgs?.startTimeClock">
+            <mat-error class="error-message app-theme-text" *ngIf="dateTimeGroup.get('startTimeClock').hasError(validation.type) && (dateTimeGroup.get('startTimeClock').dirty || dateTimeGroup.get('startTimeClock').touched)">
+              {{validation.message}}
+            </mat-error>
+          </mat-error>
+        </div>
+
+        <div class="col-sm-12 col-md-3 col-lg-3">
+          <div class="row-spacing">
+            <label class="app-theme-labels" for="event-ends">{{'events.ends' | translate}}</label>
+            <input matInput [matDatepicker]="endTimePicker" formControlName="endTime" (click)="endTimePicker.open()" placeholder="{{'placeholders.date_format' | translate}}">
+            <mat-datepicker #endTimePicker></mat-datepicker>
+          </div>
+          <div class="row-spacing">
+            <input class="row-spacing" type="text" matInput placeholder="{{'placeholders.time_format' | translate}}" formControlName="endTimeClock">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="event-location" [formGroup]="locationGroup">
+      <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+          <h2>{{'location.location' | translate}}</h2>
+        </div>
+      </div>
+
+      <!-- Areas -->
+      <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-6">
+          <mat-form-field class="form-field app-theme-labels">
+            <label for="event-location-area">{{'location.area' | translate}} *</label>
+            <mat-select placeholder="" formControlName="area">
+              <mat-option *ngFor="let area of allAreas" [value]="area">
+                {{ area.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-error *ngFor="let validation of locationValidationMsgs?.area">
+            <mat-error class="error-message app-theme-text" *ngIf="locationGroup.get('area').hasError(validation.type) && (locationGroup.get('area').dirty || locationGroup.get('area').touched)">
+              {{validation.message}}
+            </mat-error>
+          </mat-error>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-6">
+          <p class="tip">
+            {{'tips.event_area' | translate}}
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-6">
+          <mat-form-field class="form-field app-theme-labels">
+            <label for="event-location-address">{{'placeholders.event_name_or_place' | translate}}</label>
+            <input matInput id="event-location-address" maxlength="400" type="text" placeholder="" formControlName="locationExtra">
+          </mat-form-field>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-6">
+          <p class="tip">
+            {{'tips.event_address_format' | translate}}
+          </p>
+        </div>
+      </div>
+
+      <div class="row row-spacing">
+        <div class="col-sm-12 col-md-6 col-lg-6">
+          <div class="google-map" [hidden]="!showMap">
+            <app-gmap-view></app-gmap-view>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-6">
+          <p class="tip" [hidden]="!showMap">
+            {{'tips.event_map' | translate}}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="event-categories">
+      <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-6">
+          <h2>{{'events.event_category' | translate}} *</h2>
+        </div>
+      </div>
+
+      <div class="row row-spacing">
+        <!-- Left Column -->
+        <div class="col-sm-12 col-md-6 col-lg-6">
+          <!-- Field rows -->
+          <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-6" *ngFor="let category of categories; let i = index">
+              <mat-checkbox class="app-theme-labels" [(ngModel)]="category.isChecked" name="category-{{i}}">{{category.name}}</mat-checkbox>
+            </div>
+          </div>
+        </div>
+        <!-- Right Column -->
+        <div class="col-sm-12 col-md-6 col-lg-6">
+          <p class="tip">
+            {{'tips.event_main_categories' | translate}}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="event-audiences">
+      <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-6">
+          <h2>{{'shared.target_audiences' | translate}}</h2>
+        </div>
+      </div>
+
+      <div class="row row-spacing">
+        <!-- Left column -->
+        <div class="col-sm-12 col-md-6 col-lg-6">
+          <!-- Field rows -->
+          <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-6" *ngFor="let audience of audiences; let i = index">
+              <mat-checkbox class="app-theme-labels" [(ngModel)]="audience.isChecked" name="event-audience-{{i}}">{{audience.name}}</mat-checkbox>
+            </div>
+          </div>
+        </div>
+        <!-- Right column -->
+        <div class="col-sm-12 col-md-6 col-lg-6">
+          <p class="tip">
+            {{'tips.event_audiences' | translate}}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="event-provider-contact" [formGroup]="providerContactGroup">
+      <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-6">
+          <h2>{{'shared.provider' | translate}}</h2>
+        </div>
+      </div>
+
+      <div class="row row-spacing">
+        <!-- Left column -->
+        <div class="col-sm-12 col-md-6 col-lg-6">
+          <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              <mat-form-field class="form-field app-theme-labels">
+                <label for="event-provider-contact-name">{{'shared.contact_person' | translate}} *</label>
+                <input matInput id="event-provider-contact-name" maxlength="255" name="event-provider-contact-name" class="text-input" type="text" formControlName="name">
+              </mat-form-field>
+              <mat-error *ngFor="let validation of providerContactValidationMsgs?.name">
+                <mat-error class="error-message app-theme-text" *ngIf="providerContactGroup.get('name').hasError(validation.type) && (providerContactGroup.get('name').dirty || providerContactGroup.get('name').touched)">
+                  {{validation.message}}
+                </mat-error>
+              </mat-error>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              <mat-form-field class="form-field app-theme-labels">
+                <label for="event-provider-contact-phone">{{'shared.phone' | translate}} *</label>
+                <input matInput id="event-provider-contact-phone" maxlength="128" name="event-provider-contact-phone"
+                  class="text-input" type="text" formControlName="phone">
+              </mat-form-field>
+              <mat-error *ngFor="let validation of providerContactValidationMsgs?.phone">
+                <mat-error class="error-message app-theme-text" *ngIf="providerContactGroup.get('phone').hasError(validation.type) && (providerContactGroup.get('phone').dirty || providerContactGroup.get('phone').touched)">
+                  {{validation.message}}
+                </mat-error>
+              </mat-error>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              <mat-form-field class="form-field app-theme-labels">
+                <label for="event-provider-contact-email">{{'shared.email' | translate}} *</label>
+                <input matInput id="event-provider-contact-email" maxlength="254" name="event-provider-contact-email" class="text-input" type="text" formControlName="email">
+              </mat-form-field>
+              <mat-error *ngFor="let validation of providerContactValidationMsgs?.email">
+                <mat-error class="error-message app-theme-text" *ngIf="providerContactGroup.get('email').hasError(validation.type) && (providerContactGroup.get('email').dirty || providerContactGroup.get('email').touched)">
+                  {{validation.message}}
+                </mat-error>
+              </mat-error>
+            </div>
+          </div>
+        </div>
+        <!-- Right column -->
+        <div class="col-sm-12 col-md-6 col-lg-6">
+          <p class="tip">
+            {{ 'tips.event_provider_contact_details' | translate }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="event-provider" [formGroup]="providerGroup">
+      <!-- Left column -->
+      <div class="row row-spacing">
+        <div class="col-sm-12 col-md-6 col-lg-6">
+          <!-- Fields -->
+          <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              <mat-form-field class="form-field app-theme-labels">
+                <label for="event-provider-name">{{'shared.provider_name' | translate}} *</label>
+                <input matInput id="event-provider-name" maxlength="512" name="event-provider-name" class="text-input" type="text" formControlName="name">
+              </mat-form-field>
+              <mat-error *ngFor="let validation of providerValidationMsgs?.name">
+                <mat-error class="error-message app-theme-text" *ngIf="providerGroup.get('name').hasError(validation.type) && (providerGroup.get('name').dirty || providerGroup.get('name').touched)">
+                  {{validation.message}}
+                </mat-error>
+              </mat-error>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              <mat-form-field class="form-field app-theme-labels">
+                <label for="event-provider-phone">{{'shared.phone' | translate}}</label>
+                <input matInput id="event-provider-phone" maxlength="128" name="event-provider-phone" class="text-input" type="text" formControlName="phone">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              <mat-form-field class="form-field app-theme-labels">
+                <label for="event-provider-email">{{'shared.email' | translate}}</label>
+                <input matInput id="event-provider-email" maxlength="254" name="event-provider-email" class="text-input" type="email" formControlName="email">
+              </mat-form-field>
+              <mat-error *ngFor="let validation of providerValidationMsgs?.email">
+                <mat-error class="error-message app-theme-text" *ngIf="providerGroup.get('email').hasError(validation.type) && (providerGroup.get('email').dirty || providerGroup.get('email').touched)">
+                  {{validation.message}}
+                </mat-error>
+              </mat-error>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              <mat-form-field class="form-field app-theme-labels">
+                <label for="event-provider-link">{{'shared.link' | translate}}</label>
+                <input matInput id="event-provider-link" maxlength="1000" name="event-provider-link" class="text-input" type="text" formControlName="link">
+              </mat-form-field>
+              <mat-error *ngFor="let validation of providerValidationMsgs?.email">
+                <mat-error class="error-message app-theme-text" *ngIf="providerGroup.get('link').hasError(validation.type) && (providerGroup.get('link').dirty || providerGroup.get('link').touched)">
+                  {{validation.message}}
+                </mat-error>
+              </mat-error>
+            </div>
+          </div>
+        </div>
+        <!-- Right column -->
+        <div class="col-sm-12 col-md-6 col-lg-6">
+          <p class="tip">
+            {{ 'tips.event_provider_details' | translate }}
+          </p>
+          <p class="tip">
+            {{ 'tips.link' | translate }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="event-price" [formGroup]="priceGroup">
+      <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-6">
+          <h2>{{'events.price_details' | translate}}</h2>
+        </div>
+      </div>
+      <div class="row row-spacing">
+        <div class="col-sm-12 col-md-6 col-lg-6">
+          <mat-checkbox formControlName="isFree" name="event-is-free">{{'events.is_free' | translate}}</mat-checkbox>
+        </div>
+      </div>
+      <div *ngIf="showPriceFields">
+        <div class="row row-spacing">
+          <div class="col-sm-12 col-md-6 col-lg-6">
+            <h4 *ngIf="inputLanguage.sv || inputLanguage.en" class="app-theme-labels">{{'shared.price' | translate}}</h4>
+            <mat-form-field class="form-field app-theme-labels">
+              <label *ngIf="!inputLanguage.sv && !inputLanguage.en" for="priceFi" class="app-theme-labels">{{'shared.price' | translate}} ({{'labels.in_finnish' | translate}}) *</label>
+              <label *ngIf="inputLanguage.sv || inputLanguage.en" for="priceFi" class="app-theme-labels">{{'labels.in_finnish' | translate}} *</label>
+              <input matInput id="priceFi" maxlength="1000" name="priceFi" class="text-input" type="text" formControlName="priceFi">
+            </mat-form-field>
+
+            <mat-form-field class="form-field app-theme-labels" *ngIf="inputLanguage.sv">
+              <label *ngIf="!inputLanguage.sv && !inputLanguage.en" class="app-theme-labels" for="priceSv">{{'shared.price' | translate}} ({{'labels.in_swedish' | translate}})</label>
+              <label *ngIf="inputLanguage.sv || inputLanguage.en" class="app-theme-labels" for="priceSv">{{'labels.in_swedish' | translate}} *</label>
+              <input matInput id="priceSv" maxlength="1000" name="priceSv" class="text-input" type="text" formControlName="priceSv">
+            </mat-form-field>
+
+            <mat-form-field class="form-field app-theme-labels" *ngIf="inputLanguage.en">
+              <label *ngIf="!inputLanguage.sv && !inputLanguage.en" class="app-theme-labels" for="priceEn">{{'shared.price' | translate}} ({{'labels.in_english' | translate}})</label>
+              <label *ngIf="inputLanguage.sv || inputLanguage.en" class="app-theme-labels" for="priceEn">{{'labels.in_english' | translate}} *</label>
+              <input matInput id="priceEn" maxlength="1000" name="priceEn" class="text-input" type="text" formControlName="priceEn">
+            </mat-form-field>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6">
+            <p class="tip">
+              {{'tips.event_price' | translate}}
+            </p>
+          </div>
+        </div>
+        <div class="row row-spacing">
+          <div class="col-sm-12 col-md-6 col-lg-6">
+            <h4 *ngIf="inputLanguage.sv || inputLanguage.en" class="app-theme-labels">{{'shared.price_link' | translate}}</h4>
+            <mat-form-field class="form-field app-theme-labels" *ngIf="inputLanguage.fi">
+              <label *ngIf="!inputLanguage.sv && !inputLanguage.en" class="app-theme-labels" for="linkFi">{{'shared.price_link' | translate}} ({{'labels.in_finnish' | translate}})</label>
+              <label *ngIf="inputLanguage.sv || inputLanguage.en" class="app-theme-labels" for="linkFi">{{'labels.in_finnish' | translate}} *</label>
+              <input matInput id="linkFi" maxlength="1000" name="linkFi" class="text-input" type="url" formControlName="linkFi">
+            </mat-form-field>
+
+            <mat-form-field class="form-field app-theme-labels" *ngIf="inputLanguage.sv">
+              <label *ngIf="!inputLanguage.sv && !inputLanguage.en" class="app-theme-labels" for="linkSv">{{'shared.price_link' | translate}} ({{'labels.in_swedish' | translate}})</label>
+              <label *ngIf="inputLanguage.sv || inputLanguage.en" class="app-theme-labels" for="linkSv">{{'labels.in_swedish' | translate}}</label>
+              <input matInput id="linkSv" maxlength="1000" name="linkSv" class="text-input" type="url" formControlName="linkSv">
+            </mat-form-field>
+
+            <mat-form-field class="form-field app-theme-labels" *ngIf="inputLanguage.en">
+              <label *ngIf="!inputLanguage.sv && !inputLanguage.en" class="app-theme-labels" for="linkEn">{{'shared.price_link' | translate}} ({{'labels.in_english' | translate}})</label>
+              <label *ngIf="inputLanguage.sv || inputLanguage.en" class="app-theme-labels" for="linkEn">{{'labels.in_english' | translate}}</label>
+              <input matInput id="linkEn" maxlength="1000" name="linkEn" class="text-input" type="url" formControlName="linkEn">
+            </mat-form-field>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6">
+            <p class="tip">
+              {{ 'tips.link' | translate }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="event-publish tip">
+      <div class="row">
+        <div class="col-sm-12 col-md-8 col-lg-8">
+          <span class="app-theme-text">
+            Tapahtumatiedot (sisältäen tapahtumakuvan) julkaistaan avoimena datana. (ks.
+            <a [routerLink]="['/privacy-policy']">tietosuojaseloste</a>)
+          </span>
+        </div>
+        <div class="col-sm-12 col-md-2 col-lg-2">
+          <mat-checkbox [formControl]="publishingConsent" name="event-publishing-consent" class="gdpr-consent-box app-theme-labels">
+            {{ 'gdpr.accept_event' | translate }}
+          </mat-checkbox>
+        </div>
+        <div class="col-sm-12 col-md-2 col-lg-2">
+          <button class="app-theme-labels" *ngIf="!editMode" [disabled]="saving" mat-raised-button type="button" (click)="publish()">{{'buttons.publish' | translate}}</button>
+          <button class="app-theme-labels" *ngIf="editMode" [disabled]="saving" mat-raised-button type="button" (click)="publish()">{{'buttons.save' | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,211 @@
+{
+  "buttons": {
+    "ask_new": "Pyydä uusi",
+    "delete": "Poista",
+    "fetch_events": "Hae tapahtumia",
+    "fetch": "Hae",
+    "show_map": "Näytä kartta",
+    "publish": "Julkaise",
+    "save": "Tallenna",
+    "update_list": "Päivitä lista"
+  },
+  "confirm": {
+    "do_you_want_to_remove": "Haluatko varmasti poistaa ",
+    "do_you_want_to_publish": "Haluatko varmasti julkaista ",
+    "event": "tapahtuman",
+    "area": "alueen"
+  },
+  "errors": {
+    "bad_request": "Kutsua ei hyväksytty",
+    "cant_authenticate": "Käyttäjää ei voida tunnistaa",
+    "cant_connect": "Rajapintaan ei saada yhteyttä",
+    "cant_fetch_organizations": "Käyttäjäryhmiä ei voida ladata",
+    "cant_fetch_users": "Käyttäjiä ei voida ladata",
+    "credentials_invalid": "Käyttäjätunnus tai salasana väärin",
+    "image_cant_be_saved": "Kuvaa ei voida tallentaa",
+    "link_is_not_valid": "Linkki on vanhentunut tai epäkelpo.",
+    "page_not_found": "Sivua ei löydy",
+    "passwords_dont_match": "Salasanat eivät täsmää",
+    "event_cant_be_deleted": "Tapahtumaa ei voida poistaa",
+    "account_not_found": "Sähköpostia ei löytynyt"
+  },
+  "events": {
+    "basic_details": "Tapahtuman perustiedot",
+    "time_period": "Ajankohta",
+    "is_free": "Maksuton",
+    "starts": "Alkaa",
+    "ends": "Loppuu",
+    "event_category": "Tapahtumaluokka",
+    "event_created": "Tapahtuma luotu",
+    "event_being_moderated": "Kiitos! Tapahtuma tarkastetaan ennen julkaisua.",
+    "event_removed_successfully": "Tapahtuma poistettu onnistuneesti",
+    "price_details": "Hintatiedot",
+    "location_name_and_address": "Tapahtumapaikan nimi ja osoite",
+    "tickets_link": "Linkki lipunmyyntiin/ilmoittautumiseen"
+  },
+  "gdpr": {
+    "accept_event": "Hyväksyn tiedot",
+    "accept_register": "Hyväksyn tiedot",
+    "you_must_accept": "Tiedot pitää hyväksyä ennen julkistamista",
+    "you_must_accept_register": "Tiedot pitää hyväksyä ennen rekisteröitymistä"
+  },
+  "headers": {
+    "event_database": "Satakunnan tapahtumatietokanta",
+    "linked_events_in_summary": "Satakunta Events lyhyesti",
+    "add_new_image": "Lisää uusi kuva",
+    "privacy_policy": "Tietosuojaseloste",
+    "reset_password": "Palauta salasanasi"
+  },
+  "info": {
+    "password_changed": "Salasana vaihdettu",
+    "password_change_link_sent": "Salasanan vaihtolinkki lähetetty!",
+    "register_confirmation_Sent": "Rekisteröinnin vahvistusviesti lähetetty!"
+  },
+  "labels": {
+    "add_image": "Lisää kuva",
+    "only_search_in_range": "Etsi vain ajalta",
+    "in_finnish": "suomeksi",
+    "in_swedish": "ruotsiksi",
+    "in_english": "englanniksi",
+    "input_link": "Syötä linkki",
+    "upload_image": "Lataa kuva"
+  },
+  "location": {
+    "area": "Alue",
+    "location": "Sijainti"
+  },
+  "image_alt": {
+    "site_logo": "City of Pori"
+  },
+  "messages": {
+    "sign_in_to_add_events": "Kirjaudu sisään lisätäksesi tapahtumia"
+  },
+  "links": {
+
+  },
+  "paginator": {
+    "items_per_page": "tapahtumia per sivu",
+    "next": "Seuraava",
+    "page": "Sivu",
+    "previous": "Edellinen"
+  },
+  "placeholders": {
+    "company": "Yritys",
+    "date_format": "pp.kk.vvvv",
+    "email": "Sähköposti",
+    "event_name_or_place": "Tapahtumapaikan nimi tai osoite",
+    "name_or_username": "Nimi tai käyttäjätunnus",
+    "new_password": "Uusi salasana",
+    "first_name": "Etunimi",
+    "last_name": "Sukunimi",
+    "password": "Salasana",
+    "password_again": "Salasana uudelleen",
+    "time_format": "hh.mm",
+    "username": "Käyttäjätunnus"
+  },
+  "reports": {
+    "added_events": "lisättyä tapahtumaa",
+    "added_events_today": "lisättyä tapahtumaa tänään",
+    "events_amount": "Tapahtumia",
+    "number_of_added_events": "Lisättyjä tapahtumia",
+    "published_events": "julkaistua tapahtumaa"
+  },
+  "shared": {
+    "actions": "Toiminnot",
+    "add_new": "Lisää uusi",
+    "administration": "Hallinta",
+    "areas": "Alueet",
+    "date_published": "Julkaisupäivä",
+    "date_starting": "Alkamispäivä",
+    "cancel": "Peruuta",
+    "categories": "Kategoriat",
+    "category_classes": "Kategorialuokat",
+    "contact_person": "Vastuuhenkilö",
+    "created": "Luotu",
+    "create_event": "Lisää uusi tapahtuma",
+    "date": "pvm",
+    "description": "Kuvaus",
+    "edit": "Muokkaa",
+    "edit_event": "Muokkaa tapahtumaa",
+    "email": "Sähköpostiosoite",
+    "event_name": "Tapahtuman nimi",
+    "events": "Tapahtumat",
+    "filter": "Lajittelu",
+    "forgotten_password": "Salasana unohtui?",
+    "grid_view": "Ruudukkonäkymä",
+    "group": "Ryhmä",
+    "id": "tunnus",
+    "is_active": "Aktiivinen",
+    "is_staff": "Moderaattori",
+    "keywords": "Avainsanat",
+    "link": "WWW-osoite",
+    "list_view": "Listanäkymä",
+    "lock_fields": "Lukitse kentät",
+    "name": "Nimi",
+    "no": "Ei",
+    "no_events": "Ei tapahtumia.",
+    "no_more_events": "Ei lisää tapahtumia",
+    "no_picture": "Ei kuvaa.",
+    "ok": "OK",
+    "phone": "Puhelinnumero",
+    "price": "Hinta",
+    "price_info": "Hintatiedot",
+    "price_link": "WWW-osoite maksupalveluun / hinnaston lisätietoihin",
+    "privacy_policy": "Tietosuojaseloste",
+    "provider": "Tapahtumajärjestäjä",
+    "provider_name": "Tapahtumajärjestäjän nimi",
+    "publisher_id": "Julkaisija ID",
+    "published": "Julkaistut",
+    "ready": "Valmis",
+    "register": "Rekisteröidy",
+    "remove": "Poista",
+    "reports": "Raportit",
+    "search_events": "Etsi tapahtumia",
+    "send": "Lähetä",
+    "short_description": "Tiivistelmä",
+    "show_more": "Näytä lisää",
+    "sign_in": "Kirjaudu",
+    "signing_in": "Kirjaudutaan",
+    "sign_in_with_username": "Kirjaudu käyttäjätunnuksella",
+    "sign_out": "Kirjaudu ulos",
+    "status": "Tila",
+    "target_audiences": "Kohderyhmät",
+    "unlock_fields": "Avaa kentät",
+    "unpublished": "Julkaisemattomat",
+    "users": "Käyttäjät",
+    "username": "Käyttäjätunnus",
+    "yes": "Kyllä"
+  },
+  "tips": {
+    "event_area": "Valitse alue listalta.",
+    "event_details_are_inputted_in": "Tapahtumatiedot syötetään",
+    "event_address_format": "Käytä osoitteessa muotoa \"katuosoite numero, kaupunki\", esim. Antinkatu 20, Pori",
+    "event_audiences": "Kohderyhmä valitaan vain, jos tapahtuma on suunnattu ERITYISESTI jollekin kohderyhmistä. Jos tapahtuma on suunnattu kaikille, älä valitse mitään kohderyhmää. Jos kohderyhmää ei ole valittu, näytetään se listauksissa kaikille kohderyhmästä riippumatta.",
+    "event_main_categories": "Valitse tapahtumallesi aina jokin luokka, luokkia voi valita useita. Mikäli luokista ei löydy sopivaa, voit valita \"muut\".",
+    "event_map": "Osoite näytetään kartalla. Klikkaa karttaa sijainnin tarkentamiseksi.",
+    "event_short_description": "Tapahtuman ydinasiat, 1-2 lyhyttä lausetta. Näkyy tapahtumailmoituksen alussa sekä kuvallisissa tapahtumanostoissa",
+    "event_price": "Hintatieto on vapaa teksikenttä. Syötä hintatieto esimerkiksi muodossa 5€.",
+    "event_provider_contact_details": "Vastuuhenkilön tiedot, näkyvät vain ylläpidolle.",
+    "event_provider_details": "Seuraavat tiedot näkyvät tapahtuman tiedoissa tapahtumasivulla.",
+    "link": "Käytä www-osoitteessa muotoa \"http://www.esimerkki.fi\" esim. http://www.pori.fi tai kopioi/liitä linkki osoiteriviltä."
+  },
+  "users": {
+    "register_confirmation": "Rekisteröinnin vahvistusviesti lähetetty sähköpostiin. Vahvista tunnuksesi sähköpostista löytyvästä linkistä ennen kirjautumista.",
+    "registered": "Käyttäjätunnus rekisteröity",
+    "user_created": "Käyttäjä luotu!",
+    "user_updated_successfully": "Käyttäjän tiedot päivitetty onnistuneesti!"
+  },
+  "validations": {
+    "email_exists": "Sähköposti on jo rekisteröity",
+    "enter_valid_email": "Syötä sähköposti oikeassa muodossa (esim. matti.meikalainen@example.com)",
+    "form_has_errors": "Lomakkeessa on virheitä",
+    "field_is_required": "Tämä kenttä vaaditaan",
+    "id_exists": "Tunnus on jo olemassa",
+    "link": "Osoite ei ole oikein",
+    "maximum_length_exceeded": "Maksimipituus ylitetty",
+    "name_exists": "Nimi on jo olemassa",
+    "password_must_be_6_chars": "Salasanan pitää olla vähintään 6 merkkiä pitkä",
+    "time_format": "Anna aika muodossa hh.mm (tunnit.minuutit)",
+    "username_exists": "Käyttäjätunnus on jo rekisteröity"
+  }
+}

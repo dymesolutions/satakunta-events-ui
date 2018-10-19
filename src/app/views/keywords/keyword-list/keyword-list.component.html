@@ -1,0 +1,99 @@
+<mat-tab-group (selectedTabChange)="onTabChanged($event)">
+  <!-- Keywords TAB -->
+  <mat-tab label="{{'shared.categories' | translate}}">
+
+    <div class="loader-shade" *ngIf="loadingKeywords">
+      <mat-spinner></mat-spinner>
+    </div>
+
+    <mat-toolbar>
+
+      <div class="toolbar-select">
+        <mat-form-field>
+          <mat-select [(ngModel)]="selectedKeywordSetId" (change)="onKeywordSetChanged($event)">
+            <mat-option *ngFor="let keywordSet of keywordSets?.data" [value]="keywordSet.id" class="app-theme-labels">
+              {{ keywordSet.name.fi }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="toolbar-paginator" *ngIf="keywords?.meta.count > 0">
+        <span class="page-number-view app-theme-labels">
+          {{'paginator.page' | translate}} {{keywordsPage}} / {{(keywords?.meta.count / pageSize) | roundNumber}}
+        </span>
+        <app-paginator [meta]="keywords?.meta" [itemsPerPage]="pageSize" id="Keywords"></app-paginator>
+      </div>
+
+      <div class="toolbar-right">
+        <button mat-icon-button (click)="updateKeywords()" matTooltip="{{'shared.update_list' | translate}}">
+          <mat-icon>autorenew</mat-icon>
+        </button>
+      </div>
+    </mat-toolbar>
+
+    <div class="keyword-add" [formGroup]="keywordGroup">
+
+      <h5 class="app-theme-labels">{{'shared.add_new' | translate}}</h5>
+
+      <div class="same-row">
+        <mat-form-field>
+          <span matPrefix>{{selectedKeywordSetId}}:</span>
+          <input id="keywordId" type="text" formControlName="id" matInput placeholder="{{'shared.id' | translate}}">
+        </mat-form-field>
+        <mat-error class="error-message app-theme-text" *ngIf="keywordIdExists">
+          {{'validations.id_exists' | translate}}
+        </mat-error>
+        <mat-error *ngFor="let validation of keywordValidationMsgs?.id">
+          <mat-error class="error-message app-theme-text" *ngIf="keywordGroup.get('id').hasError(validation.type) && (keywordGroup.get('id').dirty || keywordGroup.get('id').touched)">
+            {{validation.message}}
+          </mat-error>
+        </mat-error>
+      </div>
+
+      <div class="same-row">
+        <mat-form-field>
+          <input id="keywordName" type="text" formControlName="name" matInput placeholder="{{'shared.name' | translate}}" maxlength="255">
+        </mat-form-field>
+        <button mat-raised-button class="app-theme-labels" (click)="save()">{{'shared.add_new' | translate}}</button>
+        <mat-error class="error-message app-theme-text" *ngIf="keywordNameExists">
+          {{'validations.name_exists' | translate}}
+        </mat-error>
+        <mat-error *ngFor="let validation of keywordValidationMsgs?.name">
+          <mat-error class="error-message app-theme-text" *ngIf="keywordGroup.get('name').hasError(validation.type) && (keywordGroup.get('name').dirty || keywordGroup.get('name').touched)">
+            {{validation.message}}
+          </mat-error>
+        </mat-error>
+      </div>
+    </div>
+
+    <hr *ngIf="keywords?.meta.count > 0">
+
+    <mat-accordion multi="false">
+      <mat-expansion-panel expanded="false" *ngFor="let keyword of keywords?.data" hideToggle="false">
+        <mat-expansion-panel-header>
+          <div class="row app-theme-text" style="width: 100%;">
+            <div class="col-sm-12 col-md-4 col-lg-4">
+              {{keyword.name.fi.length > 30 ? keyword.name.fi.substr(0, 30) + '...' : keyword.name.fi}}
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-4">
+
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-4">
+            </div>
+          </div>
+        </mat-expansion-panel-header>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+  </mat-tab>
+
+  <!-- Keywords set TAB -->
+  <mat-tab label="{{'shared.category_classes' | translate}}">
+
+    <div class="loader-shade" *ngIf="loadingKeywordSets">
+      <mat-spinner></mat-spinner>
+    </div>
+
+  </mat-tab>
+</mat-tab-group>

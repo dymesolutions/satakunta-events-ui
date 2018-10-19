@@ -1,0 +1,222 @@
+<div class="container page-margin-top">
+  <h1>{{event?.name.fi}}</h1>
+</div>
+
+<div class="container page-margin-bottom">
+  <div class="row row-spacing">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+
+      <mat-accordion multi="true">
+        <mat-expansion-panel expanded="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title class="app-theme-labels">{{'events.basic_details' | translate}}</mat-panel-title>
+            <mat-panel-description>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="row">
+            <!-- Details column -->
+            <div class="col-sm-12 col-md-6 col-lg-6">
+              <div class="row row-spacing">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                  <h3>{{'shared.event_name' | translate}}</h3>
+                  <div class="row app-theme-text">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                      {{event?.name.fi}}
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                      {{event?.name.sv}}
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                      {{event?.name.en}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row row-spacing app-theme-text">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                  <h3>{{'shared.short_description' | translate}}</h3>
+                  <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12 format-line-breaks">
+                      {{event?.short_description.fi}}
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12 format-line-breaks">
+                      {{event?.short_description.sv}}
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12 format-line-breaks">
+                      {{event?.short_description.en}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row row-spacing app-theme-text">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                  <h3>{{'shared.description' | translate}}</h3>
+                  <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12 format-line-breaks">
+                      {{event?.description.fi}}
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12 format-line-breaks">
+                      {{event?.description.sv}}
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12 format-line-breaks">
+                      {{event?.description.en}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Image column -->
+            <div class="col-sm-12 col-md-6 col-lg-6">
+              <img *ngIf="event?.images[0]" class="event-image" [src]="event?.images[0].url" mat-card-image alt="">
+            </div>
+          </div>
+
+        </mat-expansion-panel>
+        <mat-expansion-panel expanded="false">
+          <mat-expansion-panel-header>
+            <mat-panel-title class="app-theme-labels">{{'events.time_period' | translate}}</mat-panel-title>
+            <mat-panel-description>
+
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="row row-spacing app-theme-text">
+            <div class="col-sm-12 col-md-6 col-lg-6">
+              <h3>{{'events.starts' | translate}}</h3>
+              {{ event?.start_time | date: 'dd.MM.yyyy HH:mm' }}
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6">
+              <h3>{{'events.ends' | translate}}</h3>
+              {{ event?.end_time | date: 'dd.MM.yyyy HH:mm' }}
+            </div>
+          </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel expanded="false">
+          <mat-expansion-panel-header>
+            <mat-panel-title class="app-theme-labels">{{'location.location' | translate}}</mat-panel-title>
+            <mat-panel-description>
+
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <div class="row app-theme-text">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              {{event?.location.name.fi}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-6">
+              {{event?.location_extra_info.fi}}
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6">
+              <div class="google-map">
+                <app-gmap-view></app-gmap-view>
+              </div>
+            </div>
+          </div>
+
+        </mat-expansion-panel>
+
+        <mat-expansion-panel expanded="false">
+          <mat-expansion-panel-header>
+            <mat-panel-title class="app-theme-labels">{{'shared.categories' | translate}}</mat-panel-title>
+            <mat-panel-description>
+
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="row app-theme-labels">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              <mat-chip-list>
+                <mat-chip *ngFor="let keyword of event?.keywords">
+                  {{keyword.name.fi}}
+                </mat-chip>
+              </mat-chip-list>
+            </div>
+          </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel expanded="false">
+          <mat-expansion-panel-header>
+            <mat-panel-title class="app-theme-labels">{{'shared.target_audiences' | translate}}</mat-panel-title>
+            <mat-panel-description>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="row app-theme-labels">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              <mat-chip-list>
+                <mat-chip *ngFor="let audience of event?.audience">
+                  {{audience.name.fi}}
+                </mat-chip>
+              </mat-chip-list>
+            </div>
+          </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel expanded="false">
+          <mat-expansion-panel-header>
+            <mat-panel-title class="app-theme-labels">{{'shared.provider' | translate}}</mat-panel-title>
+            <mat-panel-description>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="row row-spacing">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              <h3>{{'shared.provider_name' | translate}}</h3>
+              <div class="row app-theme-text">
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                  {{event?.provider_name}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row row-spacing">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              <h3>{{'shared.phone' | translate}}</h3>
+              <div class="row app-theme-text">
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                  {{event?.provider_phone ? event.provider_phone : '-'}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row row-spacing">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              <h3>{{'shared.email' | translate}}</h3>
+              <div class="row app-theme-text">
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                  <span>{{event?.provider_email ? event.provider_email : '-'}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row row-spacing">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              <h3>{{'shared.link' | translate}}</h3>
+              <div class="row app-theme-text">
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                  {{event?.provider_link}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel expanded="false">
+          <mat-expansion-panel-header>
+            <mat-panel-title class="app-theme-labels">{{'shared.price_info' | translate}}</mat-panel-title>
+            <mat-panel-description>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="row app-theme-text">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              <div *ngIf="event?.offers[0]">
+                <span *ngIf="event.offers[0].is_free">{{'events.is_free' | translate}}</span>
+                <span *ngIf="!event.offers[0].is_free">{{event.offers[0].price.fi}}</span>
+              </div>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+</div>

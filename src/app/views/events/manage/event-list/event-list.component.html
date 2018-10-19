@@ -1,0 +1,132 @@
+<mat-tab-group (selectedTabChange)="onTabChanged($event)">
+  <!-- Unpublished TAB -->
+  <mat-tab label="{{'shared.unpublished' | translate}}">
+
+    <div class="loader-shade" *ngIf="loadingUnpublishedEvents">
+      <mat-spinner></mat-spinner>
+    </div>
+
+    <mat-toolbar>
+      <div class="toolbar-paginator" *ngIf="eventsUnpublishedMetadata?.count > 0">
+        <span class="page-number-view app-theme-labels">
+          {{'paginator.page' | translate}} {{eventsUnpublishedPage}} / {{(eventsUnpublishedMetadata?.count / pageSize) | roundNumber}}
+        </span>
+        <app-paginator [meta]="eventsUnpublishedMetadata" [itemsPerPage]="pageSize" id="EventsUnpublished"></app-paginator>
+      </div>
+
+      <span class="app-theme-labels" *ngIf="eventsUnpublishedMetadata?.count === 0">{{'shared.no_events' | translate}}</span>
+
+      <div class="toolbar-right">
+        <button mat-icon-button (click)="updateUnpublishedEvents()">
+          <mat-icon>autorenew</mat-icon>
+        </button>
+      </div>
+    </mat-toolbar>
+
+    <hr *ngIf="eventsUnpublishedMetadata?.count > 0">
+
+    <mat-accordion multi="false">
+      <mat-expansion-panel expanded="false" *ngFor="let event of eventsUnpublished?.data" hideToggle="false">
+        <mat-expansion-panel-header>
+          <div class="row app-theme-text" style="width: 100%;">
+            <div class="col-sm-12 col-md-4 col-lg-4">
+              {{event.name.fi.length > 30 ? event.name.fi.substr(0, 30) + '...' : event.name.fi}}
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-4">
+              {{event.start_time | date: 'dd.MM.yyyy HH:mm'}} - {{event.end_time | date: 'dd.MM.yyyy HH:mm'}}
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-4">
+              <span *ngIf="event.created_by">
+                <span *ngIf="event.created_by.first_name.length > 0 || event.created_by.first_name.length > 0">
+                  {{event.created_by.first_name}} {{event.created_by.last_name}}
+                </span>
+                <span *ngIf="event.created_by.first_name.length === 0 && event.created_by.first_name.length === 0">
+                  {{event.created_by.username}}
+                </span>
+              </span>
+            </div>
+          </div>
+        </mat-expansion-panel-header>
+
+        <hr>
+
+        <app-event-details [event]="event"></app-event-details>
+
+        <mat-action-row>
+          <button (click)="publish(event.id)" mat-icon-button matTooltip="{{'buttons.publish' | translate}}" *ngIf="isStaff">
+            <mat-icon>publish</mat-icon>
+          </button>
+          <button (click)="navigateToEdit(event.id)" mat-icon-button matTooltip="{{'shared.edit' | translate}}">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button (click)="delete(event)" mat-icon-button matTooltip="{{'buttons.delete' | translate}}">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-action-row>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+  </mat-tab>
+  <!-- Published TAB -->
+  <mat-tab label="{{'shared.published' | translate}}">
+
+    <div class="loader-shade" *ngIf="loadingEvents">
+      <mat-spinner></mat-spinner>
+    </div>
+
+    <mat-toolbar>
+      <div class="toolbar-paginator" *ngIf="eventsPublishedMetadata?.count > 0">
+        <span class="page-number-view app-theme-labels">
+          {{'paginator.page' | translate}} {{eventsPublishedPage}} / {{(eventsPublishedMetadata?.count / pageSize) | roundNumber}}
+        </span>
+        <app-paginator [meta]="eventsPublishedMetadata" [itemsPerPage]="pageSize" id="EventsPublished"></app-paginator>
+      </div>
+
+      <div class="toolbar-right">
+        <button mat-icon-button (click)="updatePublishedEvents()" matTooltip="{{'buttons.update_list' | translate}}">
+          <mat-icon>autorenew</mat-icon>
+        </button>
+      </div>
+    </mat-toolbar>
+
+    <hr>
+
+    <mat-accordion multi="false" *ngIf="tabIndex === 1">
+      <mat-expansion-panel expanded="false" *ngFor="let event of eventsPublished?.data" hideToggle="false">
+        <mat-expansion-panel-header>
+          <div class="row app-theme-text" style="width: 100%;">
+            <div class="col-sm-12 col-md-4 col-lg-4">
+              {{event.name.fi.length > 30 ? event.name.fi.substr(0, 30) + '...' : event.name.fi}}
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-4">
+              {{event.start_time | date: 'dd.MM.yyyy HH:mm'}} - {{event.end_time | date: 'dd.MM.yyyy HH:mm'}}
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-4">
+              <span *ngIf="event.created_by">
+                <span *ngIf="event.created_by.first_name.length > 0 || event.created_by.first_name.length > 0">
+                  {{event.created_by.first_name}} {{event.created_by.last_name}}
+                </span>
+                <span *ngIf="event.created_by.first_name.length === 0 && event.created_by.first_name.length === 0">
+                  {{event.created_by.username}}
+                </span>
+              </span>
+            </div>
+          </div>
+        </mat-expansion-panel-header>
+
+        <hr>
+
+        <app-event-details [event]="event"></app-event-details>
+
+        <mat-action-row>
+          <button (click)="navigateToEdit(event.id)" mat-icon-button matTooltip="{{'shared.edit' | translate}}">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button (click)="delete(event)" mat-icon-button matTooltip="{{'buttons.delete' | translate}}">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-action-row>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-tab>
+</mat-tab-group>

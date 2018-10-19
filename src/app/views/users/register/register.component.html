@@ -1,0 +1,98 @@
+<div class="login-background">
+  <div class="login-container">
+    <h1>{{'headers.event_database' | translate}}</h1>
+
+    <div class="container">
+      <h3>
+        {{'shared.register' | translate}}
+      </h3>
+
+      <form (ngSubmit)="submitRegisterUser()" [formGroup]="registerGroup">
+        <div class="row row-spacing">
+          <div class="col-sm-12 col-md-12 col-lg-12">
+            <mat-form-field class="form-field">
+              <label class="app-theme-labels" for="registerEmail">{{'placeholders.email' | translate}} *</label>
+              <input matInput #email id="registerEmail" type="text" formControlName="email" maxlength="150">
+              <mat-hint align="end">{{email?.value.length || 0}}/150</mat-hint>
+            </mat-form-field>
+
+            <mat-error class="error-message app-theme-text" *ngIf="emailExists">
+              {{'validations.email_exists' | translate}}
+            </mat-error>
+
+            <mat-error *ngFor="let validation of registerValidationMsgs?.email">
+              <mat-error class="error-message app-theme-text" *ngIf="registerGroup.get('email').hasError(validation.type) && (registerGroup.get('email').dirty || registerGroup.get('email').touched)">
+                {{validation.message}}
+              </mat-error>
+            </mat-error>
+          </div>
+        </div>
+
+        <div class="row row-spacing">
+          <div class="col-sm-12 col-md-12 col-lg-12">
+            <mat-form-field class="form-field">
+              <label class="app-theme-labels" for="registerPassword">{{'placeholders.password' | translate}} *</label>
+              <input matInput id="registerPassword" type="password" formControlName="password">
+            </mat-form-field>
+
+            <mat-error *ngFor="let validation of registerValidationMsgs?.password">
+              <mat-error class="error-message app-theme-text" *ngIf="registerGroup.get('password').hasError(validation.type) && (registerGroup.get('password').dirty || registerGroup.get('password').touched)">
+                {{validation.message}}
+              </mat-error>
+            </mat-error>
+          </div>
+        </div>
+
+        <div class="row row-spacing">
+          <div class="col-sm-12 col-md-12 col-lg-12">
+            <mat-form-field class="form-field">
+              <label class="app-theme-labels" for="registerPasswordAgain">{{'placeholders.password_again' | translate}} *</label>
+              <input matInput id="registerPasswordAgain" type="password" formControlName="passwordAgain">
+            </mat-form-field>
+
+            <mat-error *ngFor="let validation of registerValidationMsgs?.passwordAgain">
+              <mat-error class="error-message app-theme-text" *ngIf="registerGroup.get('passwordAgain').hasError(validation.type) && (registerGroup.get('passwordAgain').dirty || registerGroup.get('passwordAgain').touched)">
+                {{validation.message}}
+              </mat-error>
+            </mat-error>
+          </div>
+        </div>
+
+        <div class="row row-spacing">
+          <div class="col-sm-12 col-md-6 col-lg-6">
+            <mat-form-field class="form-field">
+              <label for="registerFirstname" class="app-theme-labels">{{'placeholders.first_name' | translate}} / {{'placeholders.company' | translate}}</label>
+              <input matInput #firstName type="text" id="registerFirstName" formControlName="firstName" maxlength="30">
+              <mat-hint align="end">{{firstName?.value.length || 0}}/30</mat-hint>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6">
+            <mat-form-field class="form-field">
+              <label for="registerLastName" class="app-theme-labels">{{'placeholders.last_name' | translate}}</label>
+              <input matInput #lastName type="text" id="registerLastName" formControlName="lastName" maxlength="30">
+              <mat-hint align="end">{{lastName?.value.length || 0}}/30</mat-hint>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row row-spacing">
+          <div class="col-sm-6 col-lg-4 col-md-3">
+            <mat-checkbox name="accept-register" formControlName="gdprConsent">{{'gdpr.accept_register' | translate}}</mat-checkbox>
+          </div>
+          <div class="col-sm-6 col-lg-8 col-md-9">
+            <button class="app-theme-labels" mat-raised-button type="submit">
+              {{'shared.register' | translate}}
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <hr class="row-spacing">
+    <div class="row row-spacing">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        <a class="app-theme-labels" [routerLink]="['/login']">{{'shared.sign_in' | translate}}</a> |
+        <a class="app-theme-labels" [routerLink]="['/privacy-policy']">{{'shared.privacy_policy' | translate}}</a>
+      </div>
+    </div>
+  </div>
+</div>

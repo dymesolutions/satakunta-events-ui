@@ -1,0 +1,13 @@
+<mat-card class="dashboard-item">
+  <div class="loader-shade" *ngIf="loading">
+    <mat-spinner></mat-spinner>
+  </div>
+  <mat-card-content>
+    <h1 class="metrics-number">
+      {{eventCount?.published + eventCount?.unpublished}}
+    </h1>
+    <h2>
+      {{'reports.added_events_today' | translate}}
+    </h2>
+  </mat-card-content>
+</mat-card>

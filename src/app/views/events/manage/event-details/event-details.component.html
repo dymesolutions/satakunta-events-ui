@@ -1,0 +1,185 @@
+<div class="row">
+  <div class="col-sm-12 col-md-6 col-lg-6">
+
+    <div class="row row-spacing app-theme-labels">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        <h3>{{'shared.event_name' | translate}}</h3>
+      </div>
+    </div>
+
+    <div class="row app-theme-text format-line-breaks">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        {{event?.name.fi}}
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        {{event?.name.sv}}
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        {{event?.name.en}}
+      </div>
+    </div>
+
+    <div class="row app-theme-labels">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        <h3>{{'shared.short_description' | translate}}</h3>
+      </div>
+    </div>
+
+    <div class="row app-theme-text format-line-breaks">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        {{event?.short_description.fi}}
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        {{event?.short_description.sv}}
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        {{event?.short_description.en}}
+      </div>
+    </div>
+
+    <div class="row row-spacing app-theme-labels">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        <h3>{{'shared.description' | translate}}</h3>
+      </div>
+    </div>
+
+    <div class="row app-theme-text format-line-breaks">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        {{event?.description.fi}}
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        {{event?.description.sv}}
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        {{event?.description.en}}
+      </div>
+    </div>
+  </div>
+
+  <!-- Image column -->
+  <div class="col-sm-12 col-md-6 col-lg-6">
+    <div class="row row-spacing">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        <img *ngIf="event?.images[0]" class="event-image" [src]="event?.images[0].url" mat-card-image alt="">
+      </div>
+    </div>
+
+    <div class="row row-spacing app-theme-labels">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        <h3>{{'location.location' | translate}}</h3>
+      </div>
+    </div>
+
+    <div class="row app-theme-text format-line-breaks">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        {{event?.location.name.fi}}
+      </div>
+    </div>
+    <div class="row app-theme-text format-line-breaks">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        {{event?.location_extra_info.fi}}
+      </div>
+    </div>
+
+    <div class="row row-spacing app-theme-labels">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        <h3>{{'shared.categories' | translate}}</h3>
+      </div>
+    </div>
+
+    <div class="row row-spacing app-theme-labels">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        <mat-chip-list>
+          <mat-chip *ngFor="let keyword of event?.keywords">
+            {{keyword.name.fi}}
+          </mat-chip>
+        </mat-chip-list>
+      </div>
+    </div>
+
+    <div class="row row-spacing app-theme-labels">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        <h3>{{'shared.target_audiences' | translate}}</h3>
+      </div>
+    </div>
+
+    <div class="row row-spacing app-theme-labels">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        <mat-chip-list>
+          <mat-chip *ngFor="let audience of event?.audience">
+            {{audience?.name.fi}}
+          </mat-chip>
+        </mat-chip-list>
+      </div>
+    </div>
+
+    <hr class="row-spacing">
+
+    <div class="row row-spacing app-theme-labels">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        <h3>{{'shared.provider_name' | translate}}</h3>
+      </div>
+    </div>
+
+    <div class="row app-theme-text format-line-breaks">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        {{event?.provider_name}}
+      </div>
+    </div>
+
+    <div class="row row-spacing app-theme-labels">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        <h3>{{'shared.phone' | translate}}</h3>
+      </div>
+    </div>
+
+    <div class="row app-theme-text format-line-breaks">
+      <div class="col-sm-12 col-md-4 col-lg-4">
+        {{event?.provider_phone ? event.provider_phone : '-'}}
+      </div>
+    </div>
+
+    <div class="row row-spacing app-theme-labels">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        <h3>{{'shared.email' | translate}}</h3>
+      </div>
+    </div>
+
+    <div class="row app-theme-text format-line-breaks">
+      <div class="col-sm-12 col-md-4 col-lg-4">
+        {{event?.provider_email ? event.provider_email : '-'}}
+      </div>
+    </div>
+
+    <div class="row row-spacing app-theme-labels">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        <h3>{{'shared.link' | translate}}</h3>
+      </div>
+    </div>
+
+    <div class="row app-theme-text format-line-breaks">
+      <div class="col-sm-12 col-md-4 col-lg-4">
+        {{event?.provider_link ? event.provider_link : '-'}}
+      </div>
+    </div>
+
+    <hr class="row-spacing">
+
+    <div class="row row-spacing app-theme-labels">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        <h3>{{'shared.price_info' | translate}}</h3>
+      </div>
+    </div>
+
+    <div class="row app-theme-text row-spacing">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        <div *ngIf="event?.offers[0]">
+          <span *ngIf="event.offers[0].is_free">{{'events.is_free' | translate}}</span>
+          <span *ngIf="!event.offers[0].is_free">{{event.offers[0].price.fi}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>

@@ -1,0 +1,23 @@
+@import '../../../../themes/colors';
+.image-preview {
+  width: 256px;
+}
+
+.image-preview button {
+  position: absolute;
+  top: 0;
+  background-color: rgba($color: #ffffff, $alpha: .7);
+}
+
+.image-preview-empty {
+  background-color: darken($tip-bg-color, 5%);
+  height: 157px;
+  text-align: center;
+  display: table;
+}
+
+.info-no-picture {
+  width: 100%;
+  display: table-cell;
+  vertical-align: middle;
+}

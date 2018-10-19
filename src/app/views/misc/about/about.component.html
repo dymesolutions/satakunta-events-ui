@@ -1,0 +1,68 @@
+<div class="container page-margin-top">
+  <h1>{{'headers.linked_events_in_summary' | translate}}</h1>
+</div>
+
+<div class="container container-margin-bottom">
+  <div class="row row-spacing">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+      <h2>Mikä on Satakunta Events?</h2>
+      <p>
+        Satakunta Events on kaikille avoin ja maksuton tapahtumatietokanta, jonne kaikki voivat syöttää tapahtumansa aiheesta riippumatta.
+        Tapahtumakanta on kaikkien hyödynnettävissä omilla sivuillaan tai sovelluksissa.
+      </p>
+      <p>
+        Tapahtumia voi syöttää rekisteröityneet käyttäjät. Rekisteröitynyt käyttäjä voi myös hallinnoida omia tapahtumiaan. Kirjautumaan
+        pääset osoitteessa:
+        <a [routerLink]="['/login']">satakuntaevents.fi/login</a>. Tapahtumia voi tarkastella <a [routerLink]="['/search']">hakusivulta</a>.
+      </p>
+      <p>
+        Satakunta Events on Porin kaupungin tapahtumarajapinta. Rajapintaan syötetyt tapahtumat siirtyvät automaattisesti kaupungin
+        tapahtumakalenteriin. Kaupungin tapahtumakalenteri:
+        <a href="https://tapahtumat.pori.fi" target="_blank" rel="noopener noreferrer">tapahtumat.pori.fi</a>.
+      </p>
+    </div>
+  </div>
+
+  <div class="row row-spacing">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+      <h2>Tapahtuman syöttö</h2>
+      <ul>
+        <li>Lisää uusi tapahtuma kirjautumalla palveluun: Tapahtuman tiedot on syötettävä ainakin suomeksi. Ruotsin- ja englanninkieliset
+          tiedot on suositeltavaa täyttää suurissa ja kielikohderyhmille sopivissa tapahtumissa.</li>
+        <li>Täytä tiedot niin laajasti ja tarkasti kuin mahdollista. Lomakkeen ohjetekstit avustavat täyttämisessä.</li>
+        <li> On suositeltavaa, että tapahtumalla on kuva. Kuvalle tulee CC 4.0 BY (ks.
+          <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">selitys</a>) käyttöoikeus. Tapahtumat.pori.fi käyttää kuvaa vain tapahtuman yhteydessä.</li>
+        <li>Tapahtuman alue valitaan listalta. Osoitetiedot kirjoitetaan muotoon "Antinkatu 20, Pori". Karttatieto päivittyy
+          automaattisesti. Klikkaa karttaa sijainnin tarkentamiseksi.</li>
+        <li>Tapahtumaluokka ja kohderyhmät ovat ensisijaisesti tapahtumat.pori.fi-sivustoa varten, mutta ne näkyvät myös muille
+          rajapinnan hyödyntäjille.</li>
+      </ul>
+
+      <p>
+        Virhetilanteissa ota yhteyttä helpdesk@pori.fi
+      </p>
+    </div>
+  </div>
+
+  <div class="row row-spacing">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+      <h2>Kehittäjille</h2>
+      <p>
+        Satakunta Events tapahtumatietokannan kaikki tapahtumat ovat avointa dataa. Tapahtumia voi syöttää ja hakea REST rajapinnan
+        kautta.
+        <a href="https://satakuntaevents.fi/api/v2/" target="_blank">Rajapinnan dokumentaatio</a>.
+      </p>
+
+      <p>
+        Satakunta Events tapahtumatietokanta on tehty yhteistyössä Tapahtumien digiloikka -hankkeen kanssa. Sen käytännön toteutuksesta
+        vastaa
+        <a href="https://dymesolutions.com" target="_blank">Dyme Solutions Oy</a>
+      </p>
+
+      <p>
+        Satakunta Events perustuu Helsingin kaupungin avoimella lähdekoodilla julkaisemaan
+        <a href="https://dev.hel.fi/projects/linked-events/" target="_blank" rel="noopener noreferrer">Linked Events -tapahtumarajapintaan</a>.
+      </p>
+    </div>
+  </div>
+</div>

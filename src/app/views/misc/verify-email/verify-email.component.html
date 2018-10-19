@@ -1,0 +1,14 @@
+<div class="container page-margin-top">
+  <div style="text-align: center">
+    <span *ngIf="verifying">
+      Vahvistetaan sähköpostiosoitetta...
+    </span>
+    <span *ngIf="verified">
+      Sähköpostiosoite vahvistettu!
+    </span>
+    <span *ngIf="!verified && !verifying">
+      Verifiointitunnusta ei löydy!
+    </span>
+  </div>
+  <app-loading-indicator [showSpinner]="verifying"></app-loading-indicator>
+</div>

@@ -1,0 +1,147 @@
+<div class="container page-margin-top">
+  <h1>{{'shared.search_events' | translate}}</h1>
+</div>
+
+<div class="container">
+
+  <div class="event-search">
+    <form (ngSubmit)="search()">
+      <div class="row">
+        <div class="col-sm-12 col-md-2 col-lg-2">
+          <span class="app-theme-labels">
+            {{'labels.only_search_in_range' | translate}}
+          </span>
+        </div>
+
+        <div class="col-sm-6 col-md-3 col-lg-3">
+          <input type="text" class="form-control app-theme-text" [matDatepicker]="startTimePicker" [formControl]="startTime" (click)="startTimePicker.open()"
+            placeholder="{{'placeholders.date_format' | translate}}">
+          <mat-datepicker #startTimePicker></mat-datepicker>
+        </div>
+        <div class="col-sm-6 col-md-3 col-lg-3">
+          <input type="text" class="form-control app-theme-text" [matDatepicker]="endTimePicker" [formControl]="endTime" (click)="endTimePicker.open()"
+            placeholder="{{'placeholders.date_format' | translate}}">
+          <mat-datepicker #endTimePicker></mat-datepicker>
+        </div>
+      </div>
+
+      <div class="row row-spacing">
+        <div class="col-sm-6 col-md-2 col-lg-2 app-theme-labels">
+          {{'shared.filter' | translate}}
+        </div>
+        <div class="col-sm-6 col-md-10 col-lg-10">
+          <mat-radio-group [(ngModel)]="sortingBy" [ngModelOptions]="{standalone: true}">
+            <mat-radio-button value="date_published" class="app-theme-text">
+              {{'shared.date_published' | translate}}
+            </mat-radio-button>
+            <mat-radio-button value="start_time" class="app-theme-text">
+              {{'shared.date_starting' | translate}}
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+
+      <div class="row row-spacing">
+        <div class="col-sm-6 col-md-2 col-lg-2 app-theme-labels">
+          {{'location.area' | translate}}
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-6">
+          <select name="area" id="area" [(ngModel)]="selectedArea" class="form-control app-theme-labels">
+            <option *ngFor="let area of areas" [ngValue]="area">
+              {{ area.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="event-search-text-fields">
+        <div class="row">
+          <div class="col-sm-8 col-md-8 col-lg-8">
+            <input type="text" class="form-control app-theme-text" [formControl]="searchQuery" placeholder="{{'placeholders.event_name_or_place' | translate}}"
+              style="box-shadow: none">
+          </div>
+          <div class="col-sm-4 col-md-4 col-lg-4">
+            <button class="button-search app-theme-labels" mat-raised-button type="submit">{{'buttons.fetch_events' | translate}}</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="event-list">
+
+    <div class="row row-spacing" *ngIf="events?.length > 0">
+      <div class="col-sm-12 col-md-6 col-lg-12">
+        <button mat-icon-button (click)="viewAsList()" matTooltip="{{'shared.list_view' | translate}}">
+          <mat-icon>view_list</mat-icon>
+        </button>
+
+        <button mat-icon-button (click)="viewAsGrid()" matTooltip="{{'shared.grid_view' | translate}}">
+          <mat-icon>view_module</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <div class="row-spacing app-theme-text" *ngIf="listView" class="list-view">
+      <mat-list>
+        <mat-list-item *ngFor="let event of events" style="cursor: pointer;" (click)="navigateToEvent(event.id)">
+          <div class="list-view-image-container">
+            <img [src]="event.images[0].url" mat-card-image alt="" *ngIf="event.images[0]" style="max-height: 64px; width: auto;">
+            <img [src]="'assets/images/pori-default-p.png'" alt="" *ngIf="!event.images[0]" style="max-height: 64px;width: auto;">
+          </div>
+
+          <h4 mat-line class="app-theme-labels">{{event.name.fi}}</h4>
+          <p mat-line>{{ event.shortDescription.fi}}</p>
+          <p mat-line>{{ event.startTime | date: 'dd.MM.yyyy' }} - {{ event.endTime | date: 'dd.MM.yyyy' }}</p>
+          <hr mat-line>
+
+        </mat-list-item>
+      </mat-list>
+    </div>
+
+    <div class="row" *ngIf="!listView">
+      <div class="col-sm-12 col-md-6 col-lg-4 event-card-container" *ngFor="let event of events" (click)="navigateToEvent(event.id)">
+        <mat-card class="event-card">
+          <mat-card-header>
+            <mat-card-title matTooltip="{{event.name.fi}}">
+              {{event.name.fi.length > 48 ? event.name.fi.substr(0, 45) + '...' : event.name.fi}}
+            </mat-card-title>
+            <mat-card-subtitle>
+              {{ event.startTime | date: 'dd.MM.yyyy' }} - {{ event.endTime | date: 'dd.MM.yyyy' }}
+            </mat-card-subtitle>
+          </mat-card-header>
+
+          <div class="picture-placeholder">
+            <img [src]="event.images[0].url" mat-card-image alt="" *ngIf="event.images[0]">
+            <img src="assets/images/pori-default-p.png" alt="" *ngIf="!event.images[0]">
+          </div>
+
+          <mat-card-content>
+            {{ event.shortDescription.fi | slice:0:128 }}
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="events && events.length === 0 && !loading">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        <h2>{{'shared.no_events' | translate}}</h2>
+      </div>
+    </div>
+
+    <app-loading-indicator [showSpinner]="loading"></app-loading-indicator>
+
+    <div class="row" *ngIf="events && events.length > 0">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="show-more-button">
+          <button mat-button class="app-theme-labels" (click)="showMore()" [disabled]="loading || events.length === eventMeta.count">
+            <span *ngIf="events.length < eventMeta.count">... {{'shared.show_more' | translate}} ...</span>
+            <span *ngIf="events.length === eventMeta.count">{{'shared.no_more_events' | translate}}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-logo-footer></app-logo-footer>

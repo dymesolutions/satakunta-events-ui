@@ -1,0 +1,53 @@
+@import '../../../../themes/colors';
+.event-basic-details,
+.event-datetime,
+.event-location,
+.event-categories,
+.event-audiences,
+.event-provider-contact,
+.event-provider,
+.event-price,
+.event-publish,
+.event-pin {
+  width: 100%;
+  margin: 64px 0 0;
+}
+
+.event-publish {
+  margin-bottom: 64px;
+}
+
+.event-image {
+  width: 100%;
+  cursor: pointer;
+}
+
+.event-image img {
+  width: 100%;
+}
+
+.event-image-preview {
+  background-color: $tip-bg-color;
+  cursor: pointer;
+  text-align: center;
+  padding: 48px;
+}
+
+.event-image-preview>.upload-icon {
+  width: 100%;
+  height: 50%;
+  font-size: 64px;
+}
+
+.event-image-preview:hover {
+  background-color: darken($tip-bg-color, 5%);
+}
+
+.gdpr-consent-box {
+  margin-right: 20px;
+}
+
+.left-border-input-group {
+  border-left: solid 5px #dddddd;
+  padding: 0 0 0 20px;
+}

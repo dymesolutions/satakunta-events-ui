@@ -1,0 +1,83 @@
+{
+  "buttons": {
+    "fetch_events": "Fetch events",
+    "show_map": "Show map",
+    "publish": "Publish"
+  },
+  "errors": {
+    "bad_request": "Kutsua ei hyväksytty",
+    "cant_authenticate": "Käyttäjää ei voida tunnistaa"
+  },
+  "events": {
+    "basic_details": "Tapahtuman perustiedot",
+    "time_period": "Ajankohta",
+    "is_free": "Maksuton",
+    "starts": "Starts",
+    "ends": "Ends",
+    "price_details": "Price details",
+    "location_name_and_address": "Place name and/or address",
+    "tickets_link": "Linkki lipunmyyntiin/ilmoittautumiseen"
+  },
+  "gdpr": {
+    "accept_event": "Hyväksyn tiedot",
+    "you_must_accept": "Tiedot pitää hyväksyä ennen julkistamista"
+  },
+  "headers": {
+    "linked_events_in_summary": "Satakunta Events lyhyesti",
+    "add_new_image": "Lisää uusi kuva"
+  },
+  "labels": {
+    "add_image": "Add picture",
+    "only_search_in_range": "Etsi vain ajalta",
+    "in_finnish": "in Finnish",
+    "in_swedish": "in Swedish",
+    "in_english": "in English",
+    "upload_image": "Lataa kuva kovalevyltäsi"
+  },
+  "location": {
+    "area": "Area",
+    "location": "Location"
+  },
+  "image_alt": {
+    "site_logo": "City of Pori"
+  },
+  "links": {
+
+  },
+  "placeholders": {
+    "date_format": "dd.mm.yyyy",
+    "event_name_or_place": "Tapahtumapaikan nimi tai osoite",
+    "time_format": "hh.mm"
+  },
+  "shared": {
+    "categories": "Categories",
+    "contact_person": "Contact name",
+    "create_event": "Add new event",
+    "description": "Description",
+    "email": "E-mail",
+    "link": "WWW-link",
+    "event_name": "Event name",
+    "ok": "OK",
+    "phone": "Phone number",
+    "price": "Price",
+    "price_info": "Price details",
+    "provider": "Event provider",
+    "provider_name": "Event provider name",
+    "ready": "Ready",
+    "search_events": "Search events",
+    "short_description": "Summary",
+    "target_audiences": "Target audience"
+  },
+  "tips": {
+    "event_area": "Valitse alue listalta.",
+    "event_details_are_inputted_in": "Tapahtumatiedot syötetään",
+    "event_address_format": "Käytä osoitteessa muotoa \"katuosoite numero, kaupunki\", esim. Antinkatu 20, Pori",
+    "event_audiences": "Kohderyhmä valitaan vain, jos tapahtuma on suunnattu ERITYISESTI jollekin kohderyhmistä. Jos tapahtuma on suunnattu kaikille, älä valitse mitään kohderyhmää. Jos kohderyhmää ei ole valittu, näytetään se listauksissa kaikille kohderyhmästä riippumatta.",
+    "event_main_categories": "Valitse tapahtumallesi aina jokin luokka. Mikäli luokista ei löydy sopivaa, voit valita \"muut\".",
+    "event_map": "Osoite näytetään kartalla. Klikkaa karttaa sijainnin tarkentamiseksi.",
+    "event_short_description": "Tapahtuman ydinasiat, 1-2 lyhyttä lausetta. Näkyy tapahtumailmoituksen alussa sekä tietyissä kuvallisissa tapahtumanostoissa",
+    "event_provider_contact_details": "Vastuuhenkilön tiedot, näkyvät vain ylläpidolle.",
+    "event_provider_details": "Seuraavat tiedot näkyvät tapahtuman tiedoissa tapahtumasivulla.",
+    "no_picture": "Ei kuvaa."
+  }
+}

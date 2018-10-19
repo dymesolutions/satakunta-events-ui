@@ -1,0 +1,196 @@
+@import "./themes/theme-pori";
+@import "./themes/colors";
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 64px 0 0;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.top-bar {
+  width: 100%;
+  height: 64px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+// Used in mat-form-field:
+.form-field {
+  width: 100%;
+}
+
+.row-spacing {
+  margin-top: 20px;
+}
+
+.tip {
+  margin-top: 28px;
+  background-color: $tip-bg-color;
+  padding: 20px;
+}
+
+.format-line-breaks {
+  white-space: pre-line;
+}
+
+.page-padding-top {
+  padding-top: 80px;
+}
+
+.page-margin-top {
+  margin-top: 80px;
+}
+
+.page-margin-bottom {
+  margin-bottom: 210px;
+}
+
+.container-margin-top {
+  margin-top: 20px;
+}
+
+.container-margin-bottom {
+  margin-bottom: 20px;
+}
+
+// Remove blue outline in Chrome
+button:focus {
+  outline: none;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+// Remove style from input file (use label as button)
+.file-upload input[type="file"] {
+  display: none;
+}
+
+.footer-buttons {
+  width: 100%;
+}
+
+.footer-buttons button {
+  float: right;
+}
+
+.google-map {
+  width: 100%;
+  height: 420px;
+}
+
+.ordered-list {
+  list-style-type: decimal;
+}
+
+.table-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.loading-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.loader-shade {
+  background-color: rgba($color: #efefef, $alpha: .3);
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-background {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  bottom: 0;
+  background-size: cover;
+}
+
+@media(min-width: 2800px) {
+  .login-background {
+    background-size: contain;
+  }
+}
+
+@media(max-width: 560px) {
+  .login-container {
+    width: 95%;
+    padding: 0px;
+  }
+}
+
+.login-container {
+  width: 560px;
+  text-align: left;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+.login-background h1 {
+  margin: 0 0 20px 0;
+}
+
+
+.toolbar-form {
+  display: inline-block;
+  width: 100%;
+}
+
+.toolbar-right {
+  display: inline-block;
+  width: 100%;
+}
+
+.toolbar-right>* {
+  float: right;
+}
+
+// Tabs
+.mat-tab-body-content {
+  padding: 5px;
+}
+
+.event-image {
+  max-height: 320px;
+}
+
+.toolbar-paginator {
+  display: inline-block;
+  margin: 0 15px;
+}
+
+.toolbar-paginator>.page-number-view {
+  display: inline;
+}
+
+.same-row {
+  vertical-align: top;
+  display: inline-block
+}
+
+.dashboard-item {
+  text-align: center;
+}
+
+.metrics-number {
+  font-size: 64px;
+}

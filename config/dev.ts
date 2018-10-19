@@ -4,7 +4,7 @@ export const devConfig = {
     GMapApiKey: ''
   },
   url: {
-    LEApiBaseUrl: 'http://127.0.0.1:8000/api/v1/',
+    LEApiBaseUrl: 'http://127.0.0.1:8000/api/v2/',
     GMapApiUrl: 'https://maps.googleapis.com/maps/api/js'
   },
   dataSource: {

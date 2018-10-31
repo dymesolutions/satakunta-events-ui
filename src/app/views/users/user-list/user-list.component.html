@@ -55,7 +55,7 @@
         <div class="col-sm-12 col-md-4 col-lg-3">
           <mat-form-field>
             <label class="app-theme-labels" for="organization{{user.id}}">{{'shared.group' | translate}}</label>
-            <mat-select [disabled]="user.fieldsLocked || loading" class="app-theme-text" id="organization{{user.id}}" (change)="onChangeOrganization($event, user)"
+            <mat-select [disabled]="user.fieldsLocked || loading" class="app-theme-text" id="organization{{user.id}}" (selectionChange)="onChangeOrganization($event, user)"
               [(ngModel)]="user.organization.id">
               <mat-option *ngFor="let organization of organizations" [value]="organization.id">
                 {{organization.name}}

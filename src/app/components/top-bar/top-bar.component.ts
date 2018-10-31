@@ -5,7 +5,7 @@ import { LoginDialogComponent } from '@app/components/dialogs/login-dialog/login
 import { LoginAction } from '@app/enums/login-action';
 import { IUser } from '@app/interfaces/user';
 import { LoginService } from '@app/services/login.service';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-top-bar',

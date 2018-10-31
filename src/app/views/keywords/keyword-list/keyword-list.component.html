@@ -10,7 +10,7 @@
 
       <div class="toolbar-select">
         <mat-form-field>
-          <mat-select [(ngModel)]="selectedKeywordSetId" (change)="onKeywordSetChanged($event)">
+          <mat-select [(ngModel)]="selectedKeywordSetId" (selectionChange)="onKeywordSetChanged($event)">
             <mat-option *ngFor="let keywordSet of keywordSets?.data" [value]="keywordSet.id" class="app-theme-labels">
               {{ keywordSet.name.fi }}
             </mat-option>

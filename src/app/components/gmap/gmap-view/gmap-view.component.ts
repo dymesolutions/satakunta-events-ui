@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { GmapService } from '@app/services/gmap.service';
 import { environment } from 'environments/environment';
 import { } from 'googlemaps';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-gmap-view',

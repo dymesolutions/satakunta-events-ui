@@ -4,8 +4,7 @@ import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 import { LoginService } from '@app/services/login.service';
 import { FormValidationUtil } from '@app/utils/form-validation-util';
 import { TranslateService } from '@ngx-translate/core';
-import { debounceTime } from 'rxjs/operators/debounceTime';
-import { distinctUntilChanged } from 'rxjs/operators/distinctUntilChanged';
+import { debounceTime ,  distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login-dialog',

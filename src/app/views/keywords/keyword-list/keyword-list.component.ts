@@ -5,9 +5,8 @@ import { KeywordService } from '@app/services/keyword.service';
 import { PaginatorService } from '@app/services/paginator.service';
 import { FormValidationUtil } from '@app/utils/form-validation-util';
 import { TranslateService } from '@ngx-translate/core';
-import { debounceTime } from 'rxjs/operators/debounceTime';
-import { distinctUntilChanged } from 'rxjs/operators/distinctUntilChanged';
-import { Subscription } from 'rxjs/Subscription';
+import { debounceTime ,  distinctUntilChanged } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-keyword-list',

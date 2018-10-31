@@ -4,8 +4,7 @@ import { LoginAction } from '@app/enums/login-action';
 import { IUser } from '@app/interfaces/user';
 import { ParameterUtil } from '@app/utils/parameter-util';
 import { environment } from 'environments/environment';
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
+import { Observable ,  Subject } from 'rxjs';
 
 
 interface IApiKeyResponse {

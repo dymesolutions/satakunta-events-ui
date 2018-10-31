@@ -21,13 +21,8 @@ import { FormValidationUtil } from '@app/utils/form-validation-util';
 import { EventAddImageDialogComponent } from '@app/views/events/event-add-image-dialog/event-add-image-dialog.component';
 import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
-import { Observable } from 'rxjs/Observable';
-import { debounceTime } from 'rxjs/operators/debounceTime';
-import { distinctUntilChanged } from 'rxjs/operators/distinctUntilChanged';
-import { map } from 'rxjs/operators/map';
-import { startWith } from 'rxjs/operators/startWith';
-import { Subject } from 'rxjs/Subject';
-import { Subscription } from 'rxjs/Subscription';
+import { Observable ,  Subject ,  Subscription } from 'rxjs';
+import { debounceTime ,  distinctUntilChanged ,  map ,  startWith } from 'rxjs/operators';
 
 // Validation patterns
 export const emailPattern = '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$';

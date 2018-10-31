@@ -1,11 +1,12 @@
+
+import {throwError as observableThrowError,  Observable } from 'rxjs';
+
+import {catchError} from 'rxjs/operators';
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { LoginService } from '@app/services/login.service';
 import { TranslateService } from '@ngx-translate/core';
-import 'rxjs/add/observable/throw';
-import 'rxjs/add/operator/catch';
-import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class ApiKeyInterceptor implements HttpInterceptor {
@@ -32,8 +33,8 @@ export class ApiKeyInterceptor implements HttpInterceptor {
         headers: req.headers.set('Authorization', `Token ${this.loginService.apiKey}`)
       });
 
-      return next.handle(reqClone)
-        .catch(error => {
+      return next.handle(reqClone).pipe(
+        catchError(error => {
           this.translateService.get([
             'errors.bad_request',
             'errors.cant_authenticate',
@@ -44,12 +45,12 @@ export class ApiKeyInterceptor implements HttpInterceptor {
             }
           });
 
-          return Observable.throw(error);
-        });
+          return observableThrowError(error);
+        }));
     } else {
       // No API key, just pass the interceptor and show any errors (can't connect to API)
-      return next.handle(req)
-        .catch(error => {
+      return next.handle(req).pipe(
+        catchError(error => {
           this.translateService.get([
             'errors.unknown_error',
             'errors.cant_connect',
@@ -61,8 +62,8 @@ export class ApiKeyInterceptor implements HttpInterceptor {
           });
 
           console.log(error);
-          return Observable.throw(error);
-        });
+          return observableThrowError(error);
+        }));
     }
   }
 }

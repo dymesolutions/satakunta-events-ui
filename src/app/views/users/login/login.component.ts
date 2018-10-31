@@ -6,7 +6,7 @@ import { LoginAction } from '@app/enums/login-action';
 import { LoginService } from '@app/services/login.service';
 import { FormValidationUtil } from '@app/utils/form-validation-util';
 import { TranslateService } from '@ngx-translate/core';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',

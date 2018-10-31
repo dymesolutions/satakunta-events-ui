@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { PaginatorAction } from '@app/enums/paginator-action';
 import { IPaginatorMessage } from '@app/interfaces/paginator-message';
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class PaginatorService {

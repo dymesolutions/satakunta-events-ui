@@ -16,6 +16,7 @@ import { EventService } from '@app/services/event.service';
 import { GmapService } from '@app/services/gmap.service';
 import { ImageService } from '@app/services/image.service';
 import { KeywordSetService } from '@app/services/keyword-set.service';
+import { LoginService } from '@app/services/login.service';
 import { PlaceService } from '@app/services/place.service';
 import { FormValidationUtil } from '@app/utils/form-validation-util';
 import { EventAddImageDialogComponent } from '@app/views/events/event-add-image-dialog/event-add-image-dialog.component';
@@ -114,6 +115,7 @@ export class EventCreateComponent implements OnInit, OnDestroy {
     private imageService: ImageService,
     private gMapService: GmapService,
     private keywordSetService: KeywordSetService,
+    private loginService: LoginService,
     private placeService: PlaceService,
     private route: ActivatedRoute,
     private router: Router,
@@ -527,12 +529,24 @@ export class EventCreateComponent implements OnInit, OnDestroy {
       keywordSets.data.forEach(keywordSet => {
         if (keywordSet.id === 'pori:topics') {
           // Find main categories from the keyword sets
-          this.categories = keywordSet.keywords.map(keyword => {
-            return {
-              id: keyword.id,
-              name: keyword.name.fi,
-              isChecked: false
-            };
+          this.categories = keywordSet.keywords
+            .filter(k => {
+              if (k.id === 'pori:topics:visitporirecommends') {
+                if (this.loginService.user.is_staff || this.loginService.user.is_superuser) {
+                  return true;
+                } else {
+                  return false;
+                }
+              } else {
+                return true;
+              }
+            })
+            .map(keyword => {
+              return {
+                id: keyword.id,
+                name: keyword.name.fi,
+                isChecked: false
+              };
           }).sort((a, b) => {
             // Sort by name
             return a.name.toUpperCase() < b.name.toUpperCase() ? -1 : 1;

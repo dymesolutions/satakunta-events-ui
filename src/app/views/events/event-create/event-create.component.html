@@ -515,7 +515,7 @@
           </mat-checkbox>
         </div>
         <div class="col-sm-12 col-md-2 col-lg-2">
-          <button class="app-theme-labels" *ngIf="!editMode" [disabled]="saving" mat-raised-button type="button" (click)="publish()">{{'buttons.publish' | translate}}</button>
+          <button class="app-theme-labels" *ngIf="!editMode" [disabled]="saving || !publishingConsent.value" mat-raised-button type="button" (click)="publish()">{{'buttons.publish' | translate}}</button>
           <button class="app-theme-labels" *ngIf="editMode" [disabled]="saving" mat-raised-button type="button" (click)="publish()">{{'buttons.save' | translate}}</button>
         </div>
       </div>

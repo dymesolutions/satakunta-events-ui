@@ -1,5 +1,9 @@
 import { DatePipe, registerLocaleData } from '@angular/common';
-import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpClientModule,
+  HTTP_INTERCEPTORS
+} from '@angular/common/http';
 import localeFi from '@angular/common/locales/fi';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -48,6 +52,11 @@ import { ManagePanelComponent } from '@app/views/manage/manage-panel/manage-pane
 import { AboutComponent } from '@app/views/misc/about/about.component';
 import { PrivacyPolicyComponent } from '@app/views/misc/privacy-policy/privacy-policy.component';
 import { VerifyEmailComponent } from '@app/views/misc/verify-email/verify-email.component';
+import { AudienceUsageCountComponent } from '@app/views/reports/components/audience-usage-count/audience-usage-count.component';
+import { EventTodayCountComponent } from '@app/views/reports/components/event-today-count/event-today-count.component';
+import { EventTotalCountComponent } from '@app/views/reports/components/event-total-count/event-total-count.component';
+import { KeywordUsageCountComponent } from '@app/views/reports/components/keyword-usage-count/keyword-usage-count.component';
+import { PlaceUsageCountComponent } from '@app/views/reports/components/place-usage-count/place-usage-count.component';
 import { EventsReportComponent } from '@app/views/reports/events-report/events-report.component';
 import { LoginComponent } from '@app/views/users/login/login.component';
 import { OrganizationListComponent } from '@app/views/users/organization-list/organization-list.component';
@@ -60,14 +69,14 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { environment } from 'environments/environment';
 import 'hammerjs';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
-import { AudienceUsageCountComponent } from './views/reports/components/audience-usage-count/audience-usage-count.component';
-import { EventTodayCountComponent } from './views/reports/components/event-today-count/event-today-count.component';
-import { EventTotalCountComponent } from './views/reports/components/event-total-count/event-total-count.component';
-import { KeywordUsageCountComponent } from './views/reports/components/keyword-usage-count/keyword-usage-count.component';
-import { PlaceUsageCountComponent } from './views/reports/components/place-usage-count/place-usage-count.component';
+import { PrivacyPolicyDialogComponent } from './views/misc/privacy-policy-dialog/privacy-policy-dialog.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', `.json?v=${environment.build}`);
+  return new TranslateHttpLoader(
+    http,
+    './assets/i18n/',
+    `.json?v=${environment.build}`
+  );
 }
 
 registerLocaleData(localeFi, 'fi');
@@ -93,6 +102,7 @@ registerLocaleData(localeFi, 'fi');
     VerifyEmailComponent,
     EventCreatedComponent,
     PrivacyPolicyComponent,
+    PrivacyPolicyDialogComponent,
     UserListComponent,
     LoginComponent,
     RegisterComponent,
@@ -121,7 +131,7 @@ registerLocaleData(localeFi, 'fi');
     HttpClientModule,
     materialModules,
     ReactiveFormsModule,
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' }),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -152,9 +162,10 @@ registerLocaleData(localeFi, 'fi');
   ],
   entryComponents: [
     ConfirmDialogComponent,
+    PrivacyPolicyDialogComponent,
     EventAddImageDialogComponent,
     LoginDialogComponent
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,3 +1,5 @@
+import { MatDialog } from '@angular/material';
+import { PrivacyPolicyDialogComponent } from '@app/views/misc/privacy-policy-dialog/privacy-policy-dialog.component';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./about.component.scss']
 })
 export class AboutComponent implements OnInit {
+  constructor(private dialog: MatDialog) {}
 
-  constructor() { }
+  ngOnInit() {}
 
-  ngOnInit() {
+  openPrivacyPolicyDialog() {
+    const dialogRef = this.dialog.open(PrivacyPolicyDialogComponent, {
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {});
   }
-
 }

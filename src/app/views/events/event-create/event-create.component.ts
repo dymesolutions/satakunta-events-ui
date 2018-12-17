@@ -19,10 +19,11 @@ import { KeywordSetService } from '@app/services/keyword-set.service';
 import { PlaceService } from '@app/services/place.service';
 import { FormValidationUtil } from '@app/utils/form-validation-util';
 import { EventAddImageDialogComponent } from '@app/views/events/event-add-image-dialog/event-add-image-dialog.component';
+import { PrivacyPolicyDialogComponent } from '@app/views/misc/privacy-policy-dialog/privacy-policy-dialog.component';
 import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
-import { Observable ,  Subject ,  Subscription } from 'rxjs';
-import { debounceTime ,  distinctUntilChanged ,  map ,  startWith } from 'rxjs/operators';
+import { Observable, Subject, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, startWith } from 'rxjs/operators';
 
 // Validation patterns
 export const emailPattern = '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$';
@@ -988,5 +989,13 @@ export class EventCreateComponent implements OnInit, OnDestroy {
         this.snackBar.open(msg['gdpr.you_must_accept'], msg['shared.ok'], { duration: 10000 });
       });
     }
+  }
+
+  openPrivacyPolicyDialog() {
+    const dialogRef = this.dialog.open(PrivacyPolicyDialogComponent, {
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {});
   }
 }

@@ -202,4 +202,9 @@ button:focus {
 .text-as-link {
   cursor: pointer;
   color: #007bff;
+
+  &:hover {
+    color: #0056b3;
+    text-decoration: underline;
+  }
 }

@@ -44,7 +44,7 @@
     "tickets_link": "Linkki lipunmyyntiin/ilmoittautumiseen"
   },
   "gdpr": {
-    "accept_event": "Hyväksyn tiedot",
+    "accept_event": "Hyväksyn käyttöehdot",
     "accept_register": "Hyväksyn tiedot",
     "you_must_accept": "Tiedot pitää hyväksyä ennen julkistamista",
     "you_must_accept_register": "Tiedot pitää hyväksyä ennen rekisteröitymistä"
@@ -120,6 +120,7 @@
     "cancel": "Peruuta",
     "categories": "Kategoriat",
     "category_classes": "Kategorialuokat",
+    "close": "Sulje",
     "contact_person": "Vastuuhenkilö",
     "created": "Luotu",
     "create_event": "Lisää uusi tapahtuma",
@@ -180,7 +181,7 @@
     "event_area": "Valitse alue listalta.",
     "event_details_are_inputted_in": "Tapahtumatiedot syötetään",
     "event_address_format": "Käytä osoitteessa muotoa \"katuosoite numero, kaupunki\", esim. Antinkatu 20, Pori",
-    "event_audiences": "Kohderyhmä valitaan vain, jos tapahtuma on suunnattu ERITYISESTI jollekin kohderyhmistä. Jos tapahtuma on suunnattu kaikille, älä valitse mitään kohderyhmää. Jos kohderyhmää ei ole valittu, näytetään se listauksissa kaikille kohderyhmästä riippumatta.",
+    "event_audiences": "Valitse vain yksi kohderyhmä. Älä valitse mitään kohderyhmää, jos tapahtuma on suunnattu kaikille. Jos kohderyhmää ei ole valittu, näytetään se listauksissa kaikille.",
     "event_main_categories": "Valitse tapahtumallesi aina jokin luokka, luokkia voi valita useita. Mikäli luokista ei löydy sopivaa, voit valita \"muut\".",
     "event_map": "Osoite näytetään kartalla. Klikkaa karttaa sijainnin tarkentamiseksi.",
     "event_short_description": "Tapahtuman ydinasiat, 1-2 lyhyttä lausetta. Näkyy tapahtumailmoituksen alussa sekä kuvallisissa tapahtumanostoissa",

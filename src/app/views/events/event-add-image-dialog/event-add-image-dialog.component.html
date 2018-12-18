@@ -22,7 +22,7 @@
         </div>
         <div class="row row-spacing">
           <div class="col-sm-12 col-md-12 col-lg-12">
-            <input type="text" class="form-control" formControlName="url" placeholder="http://">
+            <input type="text" id="image-link" class="form-control" formControlName="url" placeholder="http://">
 
             <mat-error *ngFor="let validation of validationMsgs?.url">
               <mat-error class="error-message app-theme-text" *ngIf="eventImageGroup.get('url').hasError(validation.type) && (eventImageGroup.get('url').dirty || eventImageGroup.get('url').touched)">
@@ -46,6 +46,7 @@
             </div>
           </div>
         </div>
+
       </div>
       <div class="col-sm-12 col-md-6 col-lg-6">
         <div class="row row-spacing">
@@ -63,7 +64,7 @@
 
             <p class="app-theme-text">
               Kuvalle tulee CC 4.0 BY (ks.
-              <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">selitys</a>) käyttöoikeus, mutta kuvaa käytetään vain tapahtuman yhteydessä. Kuvan täytyy olla riittävän suuri
+              <a href="https://creativecommons.org/licenses/by/4.0/deed.fi" target="_blank" rel="noopener noreferrer">selitys</a>) käyttöoikeus, mutta kuvaa käytetään vain tapahtuman yhteydessä. Kuvan täytyy olla riittävän suuri
               ja laadukas. Sallitut tiedostotyypit: png, jpg, jpeg. Tiedostokoon on oltava pienempi kuin 128 MB.
             </p>
           </div>

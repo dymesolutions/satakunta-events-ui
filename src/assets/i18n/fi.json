@@ -64,6 +64,7 @@
   "labels": {
     "add_image": "Lisää kuva",
     "only_search_in_range": "Etsi vain ajalta",
+    "photographer_name": "Kuvaajan nimi",
     "in_finnish": "suomeksi",
     "in_swedish": "ruotsiksi",
     "in_english": "englanniksi",

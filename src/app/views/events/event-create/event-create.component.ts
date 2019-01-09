@@ -650,16 +650,6 @@ export class EventCreateComponent implements OnInit, OnDestroy {
     } else {
       event.audiences = [];
     }
-    // event.audiences = this.audiences
-    //   .filter(audience => {
-    //     return audience.isChecked;
-    //   })
-    //   .map(audience => {
-    //     return {
-    //       id: audience.id,
-    //       name: audience.name
-    //     };
-    //   });
   }
 
   private resolveTimeFromClockValue(clock: string) {

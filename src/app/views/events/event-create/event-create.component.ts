@@ -16,6 +16,7 @@ import { EventService } from '@app/services/event.service';
 import { GmapService } from '@app/services/gmap.service';
 import { ImageService } from '@app/services/image.service';
 import { KeywordSetService } from '@app/services/keyword-set.service';
+import { LoginService } from '@app/services/login.service';
 import { PlaceService } from '@app/services/place.service';
 import { FormValidationUtil } from '@app/utils/form-validation-util';
 import { EventAddImageDialogComponent } from '@app/views/events/event-add-image-dialog/event-add-image-dialog.component';
@@ -92,6 +93,9 @@ export class EventCreateComponent implements OnInit, OnDestroy {
   categories: ICheckedValue[];
   audiences: ICheckedValue[];
 
+  // Radio Button value
+  selectedAudience: ICheckedValue;
+
   // Misc.
   private eventPosition: IPosition;
   editMode: boolean; // Use same form for editing
@@ -111,6 +115,7 @@ export class EventCreateComponent implements OnInit, OnDestroy {
     private imageService: ImageService,
     private gMapService: GmapService,
     private keywordSetService: KeywordSetService,
+    private loginService: LoginService,
     private placeService: PlaceService,
     private route: ActivatedRoute,
     private router: Router,
@@ -128,6 +133,11 @@ export class EventCreateComponent implements OnInit, OnDestroy {
     this.editMode = false;
     this.loading = false;
     this.uploadingImage = false;
+    this.selectedAudience = {
+      id: 'none',
+      name: 'No Audience',
+      isChecked: false
+    };
     this.createFormGroups();
   }
 
@@ -209,7 +219,6 @@ export class EventCreateComponent implements OnInit, OnDestroy {
     this.formGroups.push(this.priceGroup);
 
     this.publishingConsent = new FormControl(false);
-
     this.initValidationMessages();
   }
 
@@ -263,7 +272,6 @@ export class EventCreateComponent implements OnInit, OnDestroy {
   // TODO: Refactor to outer class?
   private populateForm(event: IFetchEventApiFormat) {
     // Populating the form when user navigates to edit route
-
     // Image
     if (event.images.length > 0) {
       this.imgSrc = event.images[0].url;
@@ -319,14 +327,24 @@ export class EventCreateComponent implements OnInit, OnDestroy {
       });
     });
 
+    // Audiences are checkboxes:
+    // this.audiences.forEach(audience => {
+    //   event.audience.forEach(eventAudience => {
+    //     if (audience.id === eventAudience.id) {
+    //       audience.isChecked = true;
+    //     }
+    //   });
+    // });
 
-    this.audiences.forEach(audience => {
-      event.audience.forEach(eventAudience => {
-        if (audience.id === eventAudience.id) {
-          audience.isChecked = true;
-        }
-      });
-    });
+    // Audiences are radiobuttons:
+    if (event.audience.length > 0) {
+      // Select the first in list, older events might have many audiences
+      this.selectedAudience = {
+        id: event.audience[0].id as string,
+        name: event.audience[0].name.fi as string,
+        isChecked: false
+      };
+    }
 
     const offer = event.offers[0];
 
@@ -511,12 +529,24 @@ export class EventCreateComponent implements OnInit, OnDestroy {
       keywordSets.data.forEach(keywordSet => {
         if (keywordSet.id === 'pori:topics') {
           // Find main categories from the keyword sets
-          this.categories = keywordSet.keywords.map(keyword => {
-            return {
-              id: keyword.id,
-              name: keyword.name.fi,
-              isChecked: false
-            };
+          this.categories = keywordSet.keywords
+            .filter(k => {
+              if (k.id === 'pori:topics:visitporirecommends') {
+                if (this.loginService.user.is_staff || this.loginService.user.is_superuser) {
+                  return true;
+                } else {
+                  return false;
+                }
+              } else {
+                return true;
+              }
+            })
+            .map(keyword => {
+              return {
+                id: keyword.id,
+                name: keyword.name.fi,
+                isChecked: false
+              };
           }).sort((a, b) => {
             // Sort by name
             return a.name.toUpperCase() < b.name.toUpperCase() ? -1 : 1;
@@ -612,16 +642,14 @@ export class EventCreateComponent implements OnInit, OnDestroy {
   }
 
   private addAudiences(event: Event) {
-    event.audiences = this.audiences
-      .filter(audience => {
-        return audience.isChecked;
-      })
-      .map(audience => {
-        return {
-          id: audience.id,
-          name: audience.name
-        };
-      });
+    if (this.selectedAudience.id !== 'none') {
+      event.audiences = [{
+        id: this.selectedAudience.id,
+        name: this.selectedAudience.name
+      }];
+    } else {
+      event.audiences = [];
+    }
   }
 
   private resolveTimeFromClockValue(clock: string) {
@@ -642,8 +670,6 @@ export class EventCreateComponent implements OnInit, OnDestroy {
 
   private createEventModel(imageRef: any): Event {
     const newEvent = new Event();
-    console.log('Creating event model');
-
     newEvent.name = {
       fi: this.basicDetailsGroup.get('nameFi').value,
       sv: this.basicDetailsGroup.get('nameSv').value,

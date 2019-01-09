@@ -293,9 +293,14 @@
         <div class="col-sm-12 col-md-6 col-lg-6">
           <!-- Field rows -->
           <div class="row">
-            <div class="col-sm-12 col-md-6 col-lg-6" *ngFor="let audience of audiences; let i = index">
-              <mat-checkbox class="app-theme-labels" [(ngModel)]="audience.isChecked" name="event-audience-{{i}}">{{audience.name}}</mat-checkbox>
-            </div>
+            <mat-radio-group [(ngModel)]="selectedAudience.id" name="event-audience">
+              <div class="col-sm-12 col-md-6 col-lg-6">
+                <mat-radio-button value="none">{{'placeholders.no_audience' | translate}}</mat-radio-button>
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-6" *ngFor="let audience of audiences; let i = index">
+                <mat-radio-button [value]="audience.id">{{audience.name}}</mat-radio-button>
+              </div>
+            </mat-radio-group>
           </div>
         </div>
         <!-- Right column -->

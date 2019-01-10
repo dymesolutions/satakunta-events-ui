@@ -1,4 +1,10 @@
-import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Inject,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -13,14 +19,12 @@ export const httpPattern = /^(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)
   styleUrls: ['./event-add-image-dialog.component.scss']
 })
 export class EventAddImageDialogComponent implements OnInit {
-
   eventImageGroup: FormGroup;
   imgSrc: string;
   linkRef: string;
   @ViewChild('imageFile') imageFile: ElementRef;
 
-  uploadedFile;
-
+  uploadedFile: any | null;
   validationMsgs: any;
 
   constructor(
@@ -30,9 +34,19 @@ export class EventAddImageDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) data: any
   ) {
     this.eventImageGroup = new FormGroup({
-      'url': new FormControl('', Validators.pattern(httpPattern)),
+      url: new FormControl(
+        '',
+        Validators.compose([
+          Validators.pattern(httpPattern),
+          Validators.maxLength(400)
+        ])
+      ),
       imageFile: new FormControl(''),
-      'permissionConsent': new FormControl(false, Validators.requiredTrue)
+      photographer_name: new FormControl(
+        '',
+        Validators.compose([Validators.required, Validators.maxLength(255)])
+      ),
+      permissionConsent: new FormControl(false, Validators.requiredTrue)
     });
 
     if (data.image && !data.imageFile) {
@@ -54,40 +68,38 @@ export class EventAddImageDialogComponent implements OnInit {
     }
 
     // Image Link
-    this.eventImageGroup.get('url').valueChanges
-      .subscribe(value => {
-        const imageUrl = this.eventImageGroup.get('url');
-        if (imageUrl.value.length > 0) {
-          if (imageUrl.valid) {
-            this.imgSrc = value;
-            this.uploadedFile = null;
-          } else {
-            console.log('Not valid');
-          }
+    this.eventImageGroup.get('url').valueChanges.subscribe(value => {
+      const imageUrl = this.eventImageGroup.get('url');
+      if (imageUrl.value.length > 0) {
+        if (imageUrl.valid) {
+          this.imgSrc = value;
+          this.uploadedFile = null;
         } else {
-          if (!this.uploadedFile) {
-            this.imgSrc = null;
-          }
+          console.log('Not valid');
         }
-      });
+      } else {
+        if (!this.uploadedFile) {
+          this.imgSrc = null;
+        }
+      }
+    });
 
     // Image Upload
-    this.eventImageGroup.get('imageFile').valueChanges
-      .subscribe(value => {
-        this.uploadedFile = this.imageFile.nativeElement.files[0];
-        this.loadImageFromFile();
-      });
+    this.eventImageGroup.get('imageFile').valueChanges.subscribe(value => {
+      this.uploadedFile = this.imageFile.nativeElement.files[0];
+      this.loadImageFromFile();
+    });
   }
 
   private initValidationMessages() {
-    this.translateService.get([
-      'validations.link'
-    ]).subscribe(msg => {
+    this.translateService.get(['validations.link']).subscribe(msg => {
       this.validationMsgs = {
-        url: [{
-          type: 'pattern',
-          message: msg['validations.link']
-        }],
+        url: [
+          {
+            type: 'pattern',
+            message: msg['validations.link']
+          }
+        ]
       };
     });
   }
@@ -126,14 +138,17 @@ export class EventAddImageDialogComponent implements OnInit {
             file: this.uploadedFile ? this.uploadedFile : null
           });
         } else {
-          this.translateService.get([
-            'gdpr.you_must_accept',
-            'shared.ok'
-          ]).subscribe(msg => {
-            this.snackBar.open(msg['gdpr.you_must_accept'], msg['shared.ok'], {
-              duration: 3000
+          this.translateService
+            .get(['gdpr.you_must_accept', 'shared.ok'])
+            .subscribe(msg => {
+              this.snackBar.open(
+                msg['gdpr.you_must_accept'],
+                msg['shared.ok'],
+                {
+                  duration: 3000
+                }
+              );
             });
-          });
         }
       }
     } else {
@@ -151,5 +166,4 @@ export class EventAddImageDialogComponent implements OnInit {
       file: this.uploadedFile
     });
   }
-
 }

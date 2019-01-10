@@ -749,7 +749,7 @@ export class EventCreateComponent implements OnInit, OnDestroy {
 
   openAddImageDialog() {
     const dialogRef = this.dialog.open(EventAddImageDialogComponent, {
-      width: '80%',
+      maxWidth: '1524px',
       data: {
         image: this.image,
         imageFile: this.imageFile

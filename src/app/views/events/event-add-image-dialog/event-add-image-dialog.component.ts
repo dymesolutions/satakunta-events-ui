@@ -55,6 +55,10 @@ export class EventAddImageDialogComponent implements OnInit {
       this.eventImageGroup.get('url').setValue(imageUrl);
     }
 
+    if (data.image && data.image.photographer_name) {
+      this.eventImageGroup.get('photographer_name').setValue(data.image.photographer_name);
+    }
+
     if (data.imageFile) {
       this.uploadedFile = data.imageFile;
     }
@@ -92,16 +96,24 @@ export class EventAddImageDialogComponent implements OnInit {
   }
 
   private initValidationMessages() {
-    this.translateService.get(['validations.link']).subscribe(msg => {
-      this.validationMsgs = {
-        url: [
-          {
-            type: 'pattern',
-            message: msg['validations.link']
-          }
-        ]
-      };
-    });
+    this.translateService
+      .get(['validations.link', 'validations.name_required'])
+      .subscribe(msg => {
+        this.validationMsgs = {
+          url: [
+            {
+              type: 'pattern',
+              message: msg['validations.link']
+            }
+          ],
+          photographer_name: [
+            {
+              type: 'required',
+              message: msg['validations.name_required']
+            }
+          ]
+        };
+      });
   }
 
   private loadImageFromFile() {
@@ -130,12 +142,13 @@ export class EventAddImageDialogComponent implements OnInit {
     // Image uploaded or linked
     if (this.uploadedFile || this.eventImageGroup.get('url').value) {
       // Validate URL
-      if (this.eventImageGroup.get('url').valid) {
+      if (this.eventImageGroup.get('url').valid && this.eventImageGroup.get('photographer_name').valid) {
         // Check for consent
         if (this.eventImageGroup.get('permissionConsent').value) {
           this.dialogRef.close({
             linkRef: this.imgSrc,
-            file: this.uploadedFile ? this.uploadedFile : null
+            file: this.uploadedFile ? this.uploadedFile : null,
+            photographer_name: this.eventImageGroup.get('photographer_name').value
           });
         } else {
           this.translateService
@@ -155,7 +168,8 @@ export class EventAddImageDialogComponent implements OnInit {
       // No image or image removed
       this.dialogRef.close({
         linkRef: null,
-        file: null
+        file: null,
+        photographer_name: null
       });
     }
   }
@@ -163,7 +177,8 @@ export class EventAddImageDialogComponent implements OnInit {
   close() {
     this.dialogRef.close({
       linkRef: this.imgSrc,
-      file: this.uploadedFile
+      file: this.uploadedFile ? this.uploadedFile : null,
+      photographer_name: this.eventImageGroup.get('photographer_name').value
     });
   }
 }

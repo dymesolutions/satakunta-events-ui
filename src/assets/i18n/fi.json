@@ -207,6 +207,7 @@
     "link": "Osoite ei ole oikein",
     "maximum_length_exceeded": "Maksimipituus ylitetty",
     "name_exists": "Nimi on jo olemassa",
+    "name_required": "Nimi vaaditaan",
     "password_must_be_6_chars": "Salasanan pitää olla vähintään 6 merkkiä pitkä",
     "time_format": "Anna aika muodossa hh.mm (tunnit.minuutit)",
     "username_exists": "Käyttäjätunnus on jo rekisteröity"

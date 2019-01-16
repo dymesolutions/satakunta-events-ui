@@ -14,16 +14,14 @@
             </div>
           </div>
         </div>
-
         <div class="row row-spacing">
           <div class="col-sm-12 col-md-12 col-lg-12">
             <label for="image-link" class="app-theme-labels">{{'labels.input_link' | translate}}</label>
           </div>
         </div>
-        <div class="row row-spacing">
+        <div class="row">
           <div class="col-sm-12 col-md-12 col-lg-12">
             <input type="text" id="image-link" class="form-control" formControlName="url" placeholder="http://">
-
             <mat-error *ngFor="let validation of validationMsgs?.url">
               <mat-error class="error-message app-theme-text" *ngIf="eventImageGroup.get('url').hasError(validation.type) && (eventImageGroup.get('url').dirty || eventImageGroup.get('url').touched)">
                 {{validation.message}}
@@ -36,7 +34,7 @@
             <label for="photographer-name" class="app-theme-labels">{{'labels.photographer_name' | translate}}</label>
           </div>
         </div>
-        <div class="row row-spacing">
+        <div class="row">
           <div class="col-sm-12 col-md-12 col-lg-12">
             <input type="text" maxlength="255" id="photographer-name" class="form-control" formControlName="photographer_name" placeholder="{{'labels.photographer_name' | translate}}">
             <mat-error *ngFor="let validation of validationMsgs?.photographer_name">
@@ -46,8 +44,6 @@
               </mat-error>
           </div>
         </div>
-
-
         <div class="row row-spacing">
           <div class="col-sm-12 col-md-12 col-lg-12">
             <div class="image-preview">
@@ -62,7 +58,6 @@
             </div>
           </div>
         </div>
-
       </div>
       <div class="col-sm-12 col-md-6 col-lg-6">
         <div class="row row-spacing">

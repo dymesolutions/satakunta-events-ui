@@ -281,7 +281,7 @@ export class EventCreateComponent implements OnInit, OnDestroy {
         id: event.images[0].id,
         name: 'image',
         url: event.images[0].url,
-        photographer_name: '',
+        photographer_name: event.images[0].photographer_name,
         license: 'cc_by'
       };
     }
@@ -749,7 +749,7 @@ export class EventCreateComponent implements OnInit, OnDestroy {
 
   openAddImageDialog() {
     const dialogRef = this.dialog.open(EventAddImageDialogComponent, {
-      width: '80%',
+      maxWidth: '1524px',
       data: {
         image: this.image,
         imageFile: this.imageFile
@@ -772,7 +772,7 @@ export class EventCreateComponent implements OnInit, OnDestroy {
             id: null,
             name: 'image',
             url: result.linkRef,
-            photographer_name: '',
+            photographer_name: result.photographer_name,
             license: 'cc_by'
           };
         } else {
@@ -824,7 +824,7 @@ export class EventCreateComponent implements OnInit, OnDestroy {
           id: null,
           name: 'image',
           url: result.image_url,
-          photographer_name: '',
+          photographer_name: result.photographer_name,
           license: 'cc_by'
         };
 

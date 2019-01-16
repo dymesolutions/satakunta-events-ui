@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { IPosition } from '@app/interfaces/position';
-import { Observable ,  Subject } from 'rxjs';
+import { environment } from 'environments/environment';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable()
 export class GmapService {
-
   private geocoder: google.maps.Geocoder;
   private gScriptLoaded: boolean;
 
@@ -54,46 +54,62 @@ export class GmapService {
   }
 
   geocode(address: string) {
+    const bounds = new google.maps.LatLngBounds(
+      new google.maps.LatLng(
+        environment.config.location.bounds.southWest.lat,
+        environment.config.location.bounds.southWest.lng
+      ),
+      new google.maps.LatLng(
+        environment.config.location.bounds.northEast.lat,
+        environment.config.location.bounds.northEast.lng
+      )
+    );
+
     if (address !== undefined && address.length > 0) {
-      this.geocoder.geocode({
-        address: address
-      }, (result, status) => {
+      this.geocoder.geocode(
+        {
+          address: address,
+          bounds: bounds,
+          region: environment.config.location.region
+        },
+        (result, status) => {
+          console.log('Geocoding', result);
 
-        console.log('Geocoding', result);
-
-        if (status.toString() === 'OK') {
-          if (result.length === 1) {
-            this.geocodeSubject.next(result[0]);
+          if (status.toString() === 'OK') {
+            if (result.length === 1) {
+              this.geocodeSubject.next(result[0]);
+            }
           }
         }
-      });
+      );
     }
   }
 
-  centerMap({ lat, lng }) {
-    this.mapPointSubject.next(new google.maps.LatLng(lat, lng));
+  centerMap(position: IPosition) {
+    this.mapPointSubject.next(new google.maps.LatLng(position.lat, position.lng));
   }
 
   geocodeCoords(location: google.maps.LatLng) {
     if (location !== undefined && location !== null) {
-
       this.mapClickSubject.next({
         lat: location.lat(),
         lng: location.lng()
       });
 
-      this.geocoder.geocode({
-        location: location
-      }, (result, status) => {
+      this.geocoder.geocode(
+        {
+          location: location
+        },
+        (result, status) => {
+          console.log('Geocoding', result);
 
-        console.log('Geocoding', result);
-
-        if (status.toString() === 'OK') {
-          if (result.length === 1) {
-            // this.geocodeSubject.next(result[0]);
+          if (status.toString() === 'OK') {
+            if (result.length === 1) {
+              // this.geocodeSubject.next(result[0]);
+            }
           }
         }
-      });
+      );
     }
   }
 }

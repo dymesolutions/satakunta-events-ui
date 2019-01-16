@@ -11,3 +11,5 @@
 `dataSource.places` = Data source ID for fetching areas for the form field
 
 `location.mapCenter` = Initial location for centering the map
+
+`location.bounds` = Bounds given to Google Maps geocoding for influencing search

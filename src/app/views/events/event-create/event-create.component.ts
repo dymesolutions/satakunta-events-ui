@@ -88,6 +88,7 @@ export class EventCreateComponent implements OnInit, OnDestroy {
   private geocodeResultSub: Subscription;
   private waitForGScriptSub: Subscription;
   private mapClickSubscription: Subscription;
+  private keywordsSubscription: Subscription;
 
   // Checked values
   categories: ICheckedValue[];
@@ -226,7 +227,7 @@ export class EventCreateComponent implements OnInit, OnDestroy {
     this.getPlaces();
     this.subscribeToEvents();
 
-    this.getKeywords().subscribe(done => {
+    this.keywordsSubscription = this.getKeywords().subscribe(done => {
       this.route.paramMap
         .subscribe(params => {
           const eventId = params.get('id');
@@ -252,6 +253,10 @@ export class EventCreateComponent implements OnInit, OnDestroy {
 
     if (this.mapClickSubscription) {
       this.mapClickSubscription.unsubscribe();
+    }
+
+    if (this.keywordsSubscription) {
+      this.keywordsSubscription.unsubscribe();
     }
   }
 
@@ -314,9 +319,10 @@ export class EventCreateComponent implements OnInit, OnDestroy {
 
     // Location
     this.locationGroup.get('area').setValue({
-      id: event.location.id,
-      name: event.location.name.fi
+      name: event.location.name.fi,
+      id: event.location.id
     });
+
     this.locationGroup.get('locationExtra').setValue(event.location_extra_info.fi);
     this.eventPosition = event.position;
 
@@ -566,8 +572,8 @@ export class EventCreateComponent implements OnInit, OnDestroy {
           });
         }
 
-        sub.next(true);
       });
+      sub.next(true);
     });
 
     return sub.asObservable();

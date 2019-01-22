@@ -210,7 +210,7 @@
           <mat-form-field class="form-field app-theme-labels">
             <label for="event-location-area">{{'location.area' | translate}} *</label>
             <mat-select placeholder="" formControlName="area">
-              <mat-option *ngFor="let area of allAreas" [value]="area">
+              <mat-option *ngFor="let area of allAreas" [value]="area.id">
                 {{ area.name }}
               </mat-option>
             </mat-select>

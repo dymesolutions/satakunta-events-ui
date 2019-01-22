@@ -10,6 +10,7 @@ import { MatSnackBar } from '@angular/material';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormValidationUtil } from '@app/utils/form-validation-util';
 import { TranslateService } from '@ngx-translate/core';
+import { IImage } from '@app/interfaces/image';
 
 export const httpPattern = /^(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/;
 
@@ -23,6 +24,8 @@ export class EventAddImageDialogComponent implements OnInit {
   imgSrc: string;
   linkRef: string;
   @ViewChild('imageFile') imageFile: ElementRef;
+
+  private image: IImage;
 
   uploadedFile: any | null;
   validationMsgs: any;
@@ -48,6 +51,10 @@ export class EventAddImageDialogComponent implements OnInit {
       ),
       permissionConsent: new FormControl(false, Validators.requiredTrue)
     });
+
+    if (data.image) {
+      this.image = data.image;
+    }
 
     if (data.image && !data.imageFile) {
       const imageUrl = data.image.url;
@@ -176,6 +183,8 @@ export class EventAddImageDialogComponent implements OnInit {
 
   close() {
     this.dialogRef.close({
+      id: this.image.id,
+      ['@id']: this.image['@id'],
       linkRef: this.imgSrc,
       file: this.uploadedFile ? this.uploadedFile : null,
       photographer_name: this.eventImageGroup.get('photographer_name').value

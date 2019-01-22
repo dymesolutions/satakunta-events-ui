@@ -105,7 +105,7 @@ export class EventCreateComponent implements OnInit, OnDestroy {
   // Used for internal checking (eventImageUrl used to check if submitting same image)
   private eventId: string;
   private eventImageUrl: string;
-  private eventImageId: number;
+  private eventImageId: string;
 
   constructor(
     private apiDataPipe: ApiDataPipe,
@@ -265,6 +265,7 @@ export class EventCreateComponent implements OnInit, OnDestroy {
     }])
       .subscribe(event => {
         this.eventId = event.id;
+        this.eventImageId = event.images.length > 0 ? event.images[0]['@id'] : null;
         this.populateForm(event);
       });
   }
@@ -768,8 +769,8 @@ export class EventCreateComponent implements OnInit, OnDestroy {
 
         if (!result.file && result.linkRef) {
           this.image = {
-            '@id': '',
-            id: null,
+            '@id': result['@id'] ? result['@id'] : '',
+            id: result.id ? result.id : null,
             name: 'image',
             url: result.linkRef,
             photographer_name: result.photographer_name,
@@ -988,6 +989,8 @@ export class EventCreateComponent implements OnInit, OnDestroy {
             } else {
               this.updateEvent(this.image);
             }
+          } else if (this.eventImageId) {
+            this.saveEvent({ '@id': this.eventImageId});
           } else {
             this.updateEvent(null);
           }

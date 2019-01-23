@@ -64,6 +64,7 @@ export class EventAddImageDialogComponent implements OnInit {
 
     if (data.image && data.image.photographer_name) {
       this.eventImageGroup.get('photographer_name').setValue(data.image.photographer_name);
+      this.eventImageGroup.get('permissionConsent').setValue(true);
     }
 
     if (data.imageFile) {
@@ -182,12 +183,24 @@ export class EventAddImageDialogComponent implements OnInit {
   }
 
   close() {
-    this.dialogRef.close({
-      id: this.image.id,
-      ['@id']: this.image['@id'],
-      linkRef: this.imgSrc,
-      file: this.uploadedFile ? this.uploadedFile : null,
-      photographer_name: this.eventImageGroup.get('photographer_name').value
-    });
+    if (this.image) {
+      // In case of editing:
+      if (this.eventImageGroup.get('photographer_name').valid && this.eventImageGroup.get('permissionConsent').value) {
+        this.dialogRef.close({
+          id: this.image ? this.image.id : '',
+          ['@id']: this.image ? this.image['@id'] : '',
+          linkRef: this.imgSrc,
+          file: this.uploadedFile ? this.uploadedFile : null,
+          photographer_name: this.eventImageGroup.get('photographer_name').value
+        });
+      }
+    } else {
+      // Opened dialog but no changes:
+      this.dialogRef.close({
+        linkRef: null,
+        file: null,
+        photographer_name: null
+      });
+    }
   }
 }

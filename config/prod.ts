@@ -25,8 +25,8 @@ export const prodConfig = {
       northEast: {
         lat: 62.3113,
         lng: 23.0059
-      },
-      region: 'FI'
-    }
+      }
+    },
+    region: 'FI'
   }
 };

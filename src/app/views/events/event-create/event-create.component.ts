@@ -782,6 +782,15 @@ export class EventCreateComponent implements OnInit, OnDestroy {
             photographer_name: result.photographer_name,
             license: 'cc_by'
           };
+        } else if (result.file) {
+          this.image = {
+            '@id': '',
+            id: null,
+            name: 'image',
+            url: '',
+            photographer_name: result.photographer_name,
+            license: 'cc_by',
+          };
         } else {
           this.image = null;
         }
@@ -831,7 +840,7 @@ export class EventCreateComponent implements OnInit, OnDestroy {
           id: null,
           name: 'image',
           url: result.image_url,
-          photographer_name: result.photographer_name,
+          photographer_name: this.image.photographer_name,
           license: 'cc_by'
         };
 

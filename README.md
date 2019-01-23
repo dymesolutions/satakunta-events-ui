@@ -25,13 +25,26 @@ export const devConfig = {
   location: {
     mapCenter: {
       lat: 61.593276, lng: 22.148308
-    }
+    },
+    bounds: {
+      southWest: {
+        lat: 60.872,
+        lng: 20.7732
+      },
+      northEast: {
+        lat: 62.3113,
+        lng: 23.0059
+      }
+    },
+    region: 'FI'
   }
 };
 ```
 
 - Satakunta Events requires a Google Maps API key for the  *GMapApiKey*
 - The *dataSource.places* is needed for fetching presaved locations (i.e. datasource for places).
+- Map center is used for centering the map on create event form
+- Bounds are used to influence the Google geocoder
 
 ## Building
 

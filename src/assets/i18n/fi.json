@@ -210,6 +210,7 @@
     "name_required": "Nimi vaaditaan",
     "password_must_be_6_chars": "Salasanan pitää olla vähintään 6 merkkiä pitkä",
     "time_format": "Anna aika muodossa hh.mm (tunnit.minuutit)",
-    "username_exists": "Käyttäjätunnus on jo rekisteröity"
+    "username_exists": "Käyttäjätunnus on jo rekisteröity",
+    "image_is_not_valid": "Kuvalinkki on virheellinen, valitse toinen."
   }
 }

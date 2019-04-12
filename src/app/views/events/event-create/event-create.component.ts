@@ -68,6 +68,8 @@ export class EventCreateComponent implements OnInit, OnDestroy {
 
   publishingConsent: FormControl;
 
+  imageLinkIsValid: boolean;
+
   // Image:
   imgSrc: string;
   private image: IImage;
@@ -139,6 +141,8 @@ export class EventCreateComponent implements OnInit, OnDestroy {
       name: 'No Audience',
       isChecked: false
     };
+
+    this.imageLinkIsValid = true;
     this.createFormGroups();
   }
 
@@ -768,8 +772,10 @@ export class EventCreateComponent implements OnInit, OnDestroy {
         this.imageFile = result.file;
 
         if (result.linkRef) {
+          this.imageLinkIsValid = true;
           this.imgSrc = result.linkRef;
         } else {
+          this.imageLinkIsValid = true;
           this.imgSrc = null;
         }
 
@@ -1041,5 +1047,9 @@ export class EventCreateComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe(result => {});
+  }
+
+  onImageLoadingError() {
+    this.imageLinkIsValid = false;
   }
 }

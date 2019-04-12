@@ -143,12 +143,15 @@
         </div>
 
         <div class="col-sm-12 col-md-6 col-lg-6">
-          <div class="event-image-preview" *ngIf="!imgSrc" (click)="openAddImageDialog()">
+          <div class="event-image-preview" *ngIf="!imgSrc || !imageLinkIsValid" (click)="openAddImageDialog()">
             <mat-icon class="upload-icon">file_upload</mat-icon>
             {{'labels.add_image' | translate}}
           </div>
-          <div *ngIf="imgSrc" class="event-image" (click)="openAddImageDialog()">
-            <img [src]="imgSrc" alt="">
+          <mat-error class="error-message app-theme-text row-spacing" *ngIf="!imageLinkIsValid">
+            {{'validations.image_is_not_valid' | translate}}
+          </mat-error>
+          <div *ngIf="imgSrc && imageLinkIsValid" class="event-image" (click)="openAddImageDialog()">
+            <img [src]="imgSrc" alt="" *ngIf="imageLinkIsValid" (error)="onImageLoadingError()">
           </div>
         </div>
       </div>

@@ -52,10 +52,16 @@
                   <mat-icon>delete</mat-icon>
                   {{'shared.remove' | translate}}
                 </button>
-                <img src="assets/images/pori-default-p.png" *ngIf="!imgSrc" alt="">
-                <img style="width: 100%;" [src]="imgSrc" *ngIf="imgSrc" alt="">
+                <div class="placeholder-image" *ngIf="!imgSrc || !imageLinkIsValid">
+                  <mat-icon class="photo-icon">photo</mat-icon>
+                </div>
+                <!-- <img src="assets/images/pori-default-p.png"  alt=""> -->
+                <img style="width: 100%;" (error)="onImageLoadingError()" [src]="imgSrc" *ngIf="imgSrc" alt="">
               </div>
             </div>
+            <mat-error class="error-message app-theme-text row-spacing" *ngIf="!imageLinkIsValid">
+              {{'validations.image_is_not_valid' | translate}}
+            </mat-error>
           </div>
         </div>
       </div>

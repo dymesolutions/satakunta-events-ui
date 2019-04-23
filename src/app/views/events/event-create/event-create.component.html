@@ -144,7 +144,7 @@
 
         <div class="col-sm-12 col-md-6 col-lg-6">
           <div class="event-image-preview" *ngIf="!imgSrc || !imageLinkIsValid" (click)="openAddImageDialog()">
-            <mat-icon class="upload-icon">file_upload</mat-icon>
+            <mat-icon class="upload-icon">add_a_photo</mat-icon>
             {{'labels.add_image' | translate}}
           </div>
           <mat-error class="error-message app-theme-text row-spacing" *ngIf="!imageLinkIsValid">

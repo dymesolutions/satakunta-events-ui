@@ -6,7 +6,7 @@
 .image-preview button {
   position: absolute;
   top: 0;
-  background-color: rgba($color: #ffffff, $alpha: .7);
+  background-color: rgba($color: #ffffff, $alpha: 0.7);
 }
 
 .image-preview-empty {
@@ -20,4 +20,20 @@
   width: 100%;
   display: table-cell;
   vertical-align: middle;
+}
+
+.placeholder-image {
+  background-color:  lighten(#dddddd, 9%);
+  width: 256px;
+  height: 156px;
+  padding: 48px;
+  margin: 0 0 15px 0;
+  text-align: center;
+}
+.placeholder-image > .photo-icon {
+  display: inline-block;
+  margin: 0 auto;
+  width: 100%;
+  height: 50%;
+  font-size: 64px;
 }

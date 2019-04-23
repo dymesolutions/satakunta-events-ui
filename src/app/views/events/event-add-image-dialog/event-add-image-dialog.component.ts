@@ -30,6 +30,8 @@ export class EventAddImageDialogComponent implements OnInit {
   uploadedFile: any | null;
   validationMsgs: any;
 
+  imageLinkIsValid: boolean;
+
   constructor(
     private dialogRef: MatDialogRef<EventAddImageDialogComponent>,
     private snackBar: MatSnackBar,
@@ -72,6 +74,7 @@ export class EventAddImageDialogComponent implements OnInit {
     }
 
     this.initValidationMessages();
+    this.imageLinkIsValid = true;
   }
 
   ngOnInit() {
@@ -83,6 +86,7 @@ export class EventAddImageDialogComponent implements OnInit {
     this.eventImageGroup.get('url').valueChanges.subscribe(value => {
       const imageUrl = this.eventImageGroup.get('url');
       if (imageUrl.value.length > 0) {
+        this.imageLinkIsValid = true;
         if (imageUrl.valid) {
           this.imgSrc = value;
           this.uploadedFile = null;
@@ -127,6 +131,8 @@ export class EventAddImageDialogComponent implements OnInit {
   private loadImageFromFile() {
     // Read the file for preview
     const reader = new FileReader();
+
+    this.imageLinkIsValid = true;
 
     reader.onload = (elem: any) => {
       this.eventImageGroup.get('url').setValue('');
@@ -202,5 +208,9 @@ export class EventAddImageDialogComponent implements OnInit {
         photographer_name: null
       });
     }
+  }
+
+  onImageLoadingError() {
+    this.imageLinkIsValid = false;
   }
 }

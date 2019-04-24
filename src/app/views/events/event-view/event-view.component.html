@@ -144,11 +144,14 @@
           </mat-expansion-panel-header>
           <div class="row app-theme-labels">
             <div class="col-sm-12 col-md-12 col-lg-12">
-              <mat-chip-list>
+              <mat-chip-list *ngIf="event?.audience.length > 0">
                 <mat-chip *ngFor="let audience of event?.audience">
                   {{audience.name.fi}}
                 </mat-chip>
               </mat-chip-list>
+              <span *ngIf="event?.audience.length === 0">
+                {{'placeholders.no_audience' | translate}}
+              </span>
             </div>
           </div>
         </mat-expansion-panel>

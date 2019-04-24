@@ -27,6 +27,7 @@ export class EventTodayCountComponent implements OnInit {
     }])
       .subscribe(result => {
         this.eventCount = {
+          inQueue: result.in_queue_count,
           published: result.published_count,
           unpublished: result.unpublished_count
         };

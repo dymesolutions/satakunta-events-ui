@@ -22,6 +22,7 @@ import { KeywordListComponent } from '@app/views/keywords/keyword-list/keyword-l
 import { KeywordSetListComponent } from '@app/views/keywords/keyword-set-list/keyword-set-list.component';
 import { ManagePanelComponent } from '@app/views/manage/manage-panel/manage-panel.component';
 import { AboutComponent } from '@app/views/misc/about/about.component';
+import { PrivacyPolicyDialogComponent } from '@app/views/misc/privacy-policy-dialog/privacy-policy-dialog.component';
 import { PrivacyPolicyComponent } from '@app/views/misc/privacy-policy/privacy-policy.component';
 import { VerifyEmailComponent } from '@app/views/misc/verify-email/verify-email.component';
 import { AudienceUsageCountComponent } from '@app/views/reports/components/audience-usage-count/audience-usage-count.component';
@@ -29,6 +30,7 @@ import { EventTodayCountComponent } from '@app/views/reports/components/event-to
 import { EventTotalCountComponent } from '@app/views/reports/components/event-total-count/event-total-count.component';
 import { KeywordUsageCountComponent } from '@app/views/reports/components/keyword-usage-count/keyword-usage-count.component';
 import { PlaceUsageCountComponent } from '@app/views/reports/components/place-usage-count/place-usage-count.component';
+import { UserTotalCountComponent } from '@app/views/reports/components/user-total-count/user-total-count.component';
 import { EventsReportComponent } from '@app/views/reports/events-report/events-report.component';
 import { LoginComponent } from '@app/views/users/login/login.component';
 import { OrganizationListComponent } from '@app/views/users/organization-list/organization-list.component';
@@ -36,7 +38,6 @@ import { RegisterComponent } from '@app/views/users/register/register.component'
 import { ResetPasswordComponent } from '@app/views/users/reset-password/reset-password.component';
 import { UserListComponent } from '@app/views/users/user-list/user-list.component';
 import { UserRegisteredComponent } from '@app/views/users/user-registered/user-registered.component';
-import { PrivacyPolicyDialogComponent } from './views/misc/privacy-policy-dialog/privacy-policy-dialog.component';
 
 export const componentDeclarations = [
   AboutComponent,
@@ -77,5 +78,6 @@ export const componentDeclarations = [
   EventTodayCountComponent,
   KeywordUsageCountComponent,
   AudienceUsageCountComponent,
-  PlaceUsageCountComponent
+  PlaceUsageCountComponent,
+  UserTotalCountComponent
 ];

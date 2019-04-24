@@ -110,7 +110,8 @@
     "added_events_today": "lisättyä tapahtumaa tänään",
     "events_amount": "Tapahtumia",
     "number_of_added_events": "Lisättyjä tapahtumia",
-    "published_events": "julkaistua tapahtumaa"
+    "published_events": "julkaistua tapahtumaa",
+    "active_users": "tunnistautunutta käyttäjää"
   },
   "shared": {
     "actions": "Toiminnot",

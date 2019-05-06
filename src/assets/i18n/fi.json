@@ -181,6 +181,7 @@
     "yes": "Kyllä"
   },
   "tips": {
+    "event_moderation": "Tapahtumat tarkastetaan ja hyväksytään arkipäivisin, joten viikonloppuna tai pyhäpäivänä lisätyt tapahtumat näkyvät kalenterissa vasta seuraavana arkipäivänä.",
     "event_area": "Valitse alue listalta.",
     "event_details_are_inputted_in": "Tapahtumatiedot syötetään",
     "event_address_format": "Käytä osoitteessa muotoa \"katuosoite numero, kaupunki\", esim. Antinkatu 20, Pori",

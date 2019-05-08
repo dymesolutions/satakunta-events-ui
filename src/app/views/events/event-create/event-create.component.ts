@@ -574,8 +574,18 @@ export class EventCreateComponent implements OnInit, OnDestroy {
             // Sort by name
             return a.name.toUpperCase() < b.name.toUpperCase() ? -1 : 1;
           });
+        } else if (keywordSet.id === 'system:topic') {
+          this.categories = this.categories.concat(keywordSet.keywords.map(keyword => {
+            return {
+              id: keyword.id,
+              name: keyword.name.fi,
+              isChecked: false
+            };
+          })).sort((a, b) => {
+            // Sort by name
+            return a.name.toUpperCase() < b.name.toUpperCase() ? -1 : 1;
+          });
         }
-
       });
       sub.next(true);
     });

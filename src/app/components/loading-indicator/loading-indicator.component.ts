@@ -7,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class LoadingIndicatorComponent implements OnInit {
 
-  @Input('showSpinner') showSpinner: boolean;
+  @Input() showSpinner: boolean;
 
   constructor() { }
 

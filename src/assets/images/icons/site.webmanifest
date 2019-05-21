@@ -1,0 +1,14 @@
+{
+    "name": "Satakunta Events",
+    "short_name": "Satakunta Events",
+    "icons": [
+        {
+            "src": "/assets/images/icons/android-chrome-192x192.png?v=69PEyEzenr",
+            "sizes": "192x192",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff",
+    "display": "standalone"
+}

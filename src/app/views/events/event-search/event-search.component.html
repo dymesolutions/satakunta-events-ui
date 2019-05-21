@@ -87,7 +87,7 @@
         <mat-list-item *ngFor="let event of events" style="cursor: pointer;" (click)="navigateToEvent(event.id)">
           <div class="list-view-image-container">
             <img [src]="event.images[0].url" mat-card-image alt="" *ngIf="event.images[0]" style="max-height: 64px; width: auto;">
-            <img [src]="'assets/images/pori-default-p.png'" alt="" *ngIf="!event.images[0]" style="max-height: 64px;width: auto;">
+            <img [src]="'assets/images/default.png'" alt="" *ngIf="!event.images[0]" style="max-height: 64px;width: auto;">
           </div>
 
           <h4 mat-line class="app-theme-labels">{{event.name.fi}}</h4>
@@ -113,7 +113,7 @@
 
           <div class="picture-placeholder">
             <img [src]="event.images[0].url" mat-card-image alt="" *ngIf="event.images[0]">
-            <img src="assets/images/pori-default-p.png" alt="" *ngIf="!event.images[0]">
+            <img src="assets/images/default.png" alt="" *ngIf="!event.images[0]">
           </div>
 
           <mat-card-content>

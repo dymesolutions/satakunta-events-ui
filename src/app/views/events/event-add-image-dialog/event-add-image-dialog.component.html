@@ -55,7 +55,7 @@
                 <div class="placeholder-image" *ngIf="!imgSrc || !imageLinkIsValid">
                   <mat-icon class="photo-icon">photo</mat-icon>
                 </div>
-                <!-- <img src="assets/images/pori-default-p.png"  alt=""> -->
+                <!-- <img src="assets/images/default.png"  alt=""> -->
                 <img style="width: 100%;" (error)="onImageLoadingError()" [src]="imgSrc" *ngIf="imgSrc" alt="">
               </div>
             </div>

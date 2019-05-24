@@ -86,7 +86,9 @@ dl.app-theme dd {
 .login-background {
   color: black;
   background-color: #000;
-  background-image: url('/assets/images/kavelykuva_anssikoskinen1.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url('/assets/images/backgrounds/kavelykuva_anssikoskinen1.jpg');
 }
 
 .login-container {
